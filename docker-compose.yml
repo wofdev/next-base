@@ -1,0 +1,55 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:15
+    container_name: keycloak_postgres
+    environment:
+      POSTGRES_DB: keycloak
+      POSTGRES_USER: keycloak
+      POSTGRES_PASSWORD: keycloak
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - mynet
+
+  keycloak:
+    image: quay.io/keycloak/keycloak:26.0.0
+    container_name: keycloak
+    environment:
+      KEYCLOAK_ADMIN: admin
+      KEYCLOAK_ADMIN_PASSWORD: admin
+      KC_DB: postgres
+      KC_DB_URL: jdbc:postgresql://postgres:5432/keycloak
+      KC_DB_USERNAME: keycloak
+      KC_DB_PASSWORD: keycloak
+    ports:
+      - "8080:8080"
+    depends_on:
+      - postgres
+    command:
+      - start-dev
+    networks:
+      - mynet
+
+  # frontend:
+  #   build: ./frontend
+  #   container_name: nextjs
+  #   ports:
+  #     - "3000:3000"
+  #   environment:
+  #     NODE_ENV: development
+  #     # این رو ست کن تا فرانت بتونه Keycloak رو صدا بزنه
+  #     NEXT_PUBLIC_KEYCLOAK_URL: http://localhost:8080
+  #   volumes:
+  #     - ./frontend:/app
+  #     # - /app/node_modules:/app/node_modules
+  #   command: npm run dev
+  #   networks:
+  #     - mynet
+
+volumes:
+  postgres_data:
+
+networks:
+  mynet:
