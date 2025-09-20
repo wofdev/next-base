@@ -39,7 +39,9 @@ export default function Home() {
             {!session ? (
               <Button
                 onClick={() => signIn("keycloak")}
-                className="bg-primary hover:bg-primary/90 text-primary-foreground"
+                variant="outline"
+                className="text-sm"
+                // className="bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 Sign In
               </Button>
@@ -267,7 +269,7 @@ export default function Home() {
           </div>
 
           <div className="mt-8 pt-8 border-t border-border text-center text-sm text-muted-foreground">
-            © {new Date().getFullYear()} TopCV. All rights reserved. Built with ❤️ for professionals worldwide.
+            © {new Date().getFullYear()} TopCV. All rights reserved. Built for professionals worldwide.
           </div>
         </div>
       </footer>

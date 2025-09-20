@@ -7,10 +7,12 @@ export default function DashboardLayout({ children }) {
     <div className="flex min-h-screen">
       <SidebarProvider>
         <AppSidebar />
-        <main>
-          <SidebarTrigger />
-          {children}
-        </main>
+        <div className="flex flex-col w-full relative">
+          <header className="flex items-center px-4 border-b fixed top-0 z-50 w-full bg-white">
+            <SidebarTrigger />
+          </header>
+          <div className="flex justify-center w-full p-5 mt-7">{children}</div>
+        </div>
       </SidebarProvider>
     </div>
   );

@@ -1,14 +1,13 @@
-import { Card, CardContent, CardHeader } from "@/components/ui/card"
+"use client";
+import { Hammer } from "lucide-react";
 
-export default function Page() {
-    return <div>
-        <Card>
-            <CardHeader>
-                Welcome!
-            </CardHeader>
-            <CardContent>
-                welcom to your dashboard start by choosing from sidebar...
-            </CardContent>
-        </Card>
+export default function Dashboard() {
+  return (
+    <div className="w-3/4 p-6 space-y-6 ">
+      <small>
+        <Hammer/>
+        this page is under construction...
+      </small>
     </div>
+  );
 }

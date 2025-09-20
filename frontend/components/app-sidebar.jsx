@@ -11,7 +11,7 @@ import {
   SidebarMenuItem,
   SidebarFooter
 } from "@/components/ui/sidebar"
-import { Calendar, Home, Inbox, Search, Settings,User2,ChevronUp } from "lucide-react"
+import { Calendar, Home, Inbox, Search, Settings,User2,ChevronUp, LetterText, Gauge, Eye } from "lucide-react"
 import {
   DropdownMenu,
   DropdownMenuContent,
@@ -25,29 +25,19 @@ import { useSession, signIn, signOut } from "next-auth/react"
 export function AppSidebar() {
   const items = [
   {
-    title: "Home",
-    url: "#",
-    icon: Home,
+    title: "Dashboard",
+    url: "/dashboard",
+    icon: Gauge,
   },
-  {
-    title: "Inbox",
-    url: "#",
-    icon: Inbox,
+    {
+    title: "Resume Content",
+    url: "/dashboard/resume-content",
+    icon: LetterText,
   },
-  {
-    title: "Calendar",
-    url: "#",
-    icon: Calendar,
-  },
-  {
-    title: "Search",
-    url: "#",
-    icon: Search,
-  },
-  {
-    title: "Settings",
-    url: "#",
-    icon: Settings,
+    {
+    title: "Resume Preview",
+    url: "/dashboard/resume-preview",
+    icon: Eye,
   },
 ]
 
