@@ -31,12 +31,12 @@ export function AppSidebar() {
   },
     {
     title: "Resume Content",
-    url: "/dashboard/resume-content",
+    url: "/dashboard/resume/content",
     icon: LetterText,
   },
     {
     title: "Resume Preview",
-    url: "/dashboard/resume-preview",
+    url: "/dashboard/resume/preview",
     icon: Eye,
   },
 ]

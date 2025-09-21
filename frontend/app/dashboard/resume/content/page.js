@@ -19,7 +19,7 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@radix-ui/react-context-menu";
-import { PencilLine, Trash2, X } from "lucide-react";
+import { PencilLine, Plus, Trash2, X } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 export default function ResumeContent() {
   const [resumeData, setResumeData] = useState({
@@ -49,7 +49,8 @@ export default function ResumeContent() {
 
   const [openDialog, setOpenDialog] = useState(null);
   const [tempData, setTempData] = useState({});
-
+  const [tempSkill, setTempSkill] = useState("");
+  const [tempSkillParent, setTempSkillParent] = useState("");
 
 
   const sendData = async () => {
@@ -222,34 +223,79 @@ export default function ResumeContent() {
         <AccordionItem key="skills" value="skills" className="bg-gray-100 rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Skills</AccordionTrigger>
           <AccordionContent className="bg-white p-3 rounded-md mb-3">
+            <div className="flex mb-4 items-center">
+              <Input
+                className="w-42"
+                value={tempSkillParent}
+                onChange={(e) => setTempSkillParent(e.target.value)} />
+              <Plus className="bg-primary text-white ms-2 rounded-full" onClick={() => {
+
+                if (Object.keys(resumeData.skills).some(x => x == tempSkillParent.trim().replace(/\s+/g, ' '))) {
+                  alert("exists...")
+                } else {
+                  setResumeData((prev) => ({
+                    ...prev,
+                    skills: {
+                      ...prev.skills,
+                      [tempSkillParent.trim().replace(/\s+/g, ' ')]: [],
+                    },
+                  }));
+                  setTempSkillParent("");
+                }
+
+
+              }} /></div>
             <div className="space-y-3">
               <Accordion type="single" collapsible className="w-full">
                 {resumeData && Object.keys(resumeData?.skills).map((x) => {
-                  return <AccordionItem value={x} className="bg-gray-100 rounded-md px-3 border-none mb-3">
+                  return <AccordionItem key={x} value={x} className="bg-gray-100 rounded-md px-3 border-none mb-3">
                     <AccordionTrigger>{x}</AccordionTrigger>
                     <AccordionContent className="bg-white p-3 rounded-md mb-3">
-                    {resumeData?.skills[x].map((y) => (
-  <span
-    key={y}
-    className="shadow-sm border me-1 rounded-full px-2 py-1 items-center gap-1  " 
-  >
-    {y}
+                      <div className="flex mb-4 items-center">
+                        <Input
+                          className="w-42"
+                          value={tempSkill}
+                          onChange={(e) => setTempSkill(e.target.value)} />
+                        <Plus className="bg-primary text-white ms-2 rounded-full" onClick={() => {
 
-    <span className="cursor-pointer text-rose-500  ms-1"
-      onClick={() => {
-        setResumeData((prev) => ({
-          ...prev,
-          skills: {
-            ...prev.skills,
-            [x]: prev.skills[x].filter((skill) => skill !== y),
-          },
-        }));
-      }}>
-      x
-    </span>
-    
-  </span>
-))}
+                          if (resumeData.skills[x].some(tmp => tmp == tempSkill.trim().replace(/\s+/g, ' '))) {
+                            alert("exists...")
+                          } else {
+                            setResumeData((prev) => ({
+                              ...prev,
+                              skills: {
+                                ...prev.skills,
+                                [x]: [...prev.skills[x], tempSkill.trim().replace(/\s+/g, ' ')],
+                              },
+                            }));
+                            setTempSkill("");
+                          }
+
+
+                        }} /></div>
+                      {resumeData?.skills[x].map((y) => (
+                        <span
+                          key={y}
+                          className="shadow-sm border me-1 rounded-full px-2 py-1 items-center gap-1  "
+                        >
+                          {y}
+
+                          <span className="cursor-pointer text-rose-500  ms-1"
+                            onClick={() => {
+                              setResumeData((prev) => ({
+                                ...prev,
+                                skills: {
+                                  ...prev.skills,
+                                  [x]: prev.skills[x].filter((skill) => skill !== y),
+                                },
+                              }));
+                              setTempSkill("");
+                            }}>
+                            x
+                          </span>
+
+                        </span>
+                      ))}
 
                     </AccordionContent>
                   </AccordionItem>
