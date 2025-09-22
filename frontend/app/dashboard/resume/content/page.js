@@ -249,8 +249,19 @@ export default function ResumeContent() {
               <Accordion type="single" collapsible className="w-full">
                 {resumeData && Object.keys(resumeData?.skills).map((x) => {
                   return <AccordionItem key={x} value={x} className="bg-gray-100 rounded-md px-3 border-none mb-3">
-                    <AccordionTrigger>{x}</AccordionTrigger>
+                    <AccordionTrigger>
+                      {x}
+                    </AccordionTrigger>
                     <AccordionContent className="bg-white p-3 rounded-md mb-3">
+
+
+                      <span className="flex items-center mb-3 cursor-pointer"        onClick={() => {
+                            setResumeData((prev) => ({ ...prev, skills: Object.fromEntries(Object.entries(resumeData.skills).filter(([key, _]) => key !== x)) }))
+                          }}>
+                        ! Remove whole <span className="font-bold mx-1"> {x} </span> key
+                        {/* <X className="bg-primary text-white me-2 rounded-full w-4 h-4" /> */}
+                      </span>
+
                       <div className="flex mb-4 items-center">
                         <Input
                           className="w-42"
