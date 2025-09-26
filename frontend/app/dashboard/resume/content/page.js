@@ -1,6 +1,5 @@
 "use client";
-
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import axios from "axios";
 import {
   Accordion,
@@ -19,68 +18,115 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog";
 import { Separator } from "@radix-ui/react-context-menu";
-import { PencilLine, Plus, Trash2, X } from "lucide-react";
-import { Badge } from "@/components/ui/badge";
+import AboutSection from "@/components/resumet-content/AboutSection";
+import ContactSection from "@/components/resumet-content/ContactSection";
+import EducationSection from "@/components/resumet-content/EducationSection";
+import WorkSection from "@/components/resumet-content/WorkSection";
+import ProjectSection from "@/components/resumet-content/ProjectSection";
+import CertificationSection from "@/components/resumet-content/CertificationSection";
+import HobbySection from "@/components/resumet-content/HobbySection";
+import SkillsSection from "@/components/resumet-content/SkillSection";
 export default function ResumeContent() {
   const [resumeData, setResumeData] = useState({
-    about: "",
-    profilePhoto: null,
-    display_name: "",
-    title: "",
-    skills: { frontend: ["nextjs", "react", "js", "hooks"], backend: ["python", "django", "celery"] },
-    educations: [],
-    works: [],
-    projects: [],
-    certifications: [],
-    hobbies: [],
+    titleData: {
+      about:
+        "I am a passionate full-stack developer with 5+ years of experience in building scalable web applications and RESTful APIs.",
+      profilePhoto: null,
+      title: "Full Stack Developer",
+    },
+    skills: {
+      frontend: ["Next.js", "React", "JavaScript", "Hooks"],
+      backend: ["Python", "Django", "Celery", "REST API"],
+      devops: ["Docker", "AWS", "CI/CD"],
+    },
+    educations: [
+      {
+        from: "2018-09-01",
+        to: "2022-06-30",
+        title: "B.Sc. in Computer Science - University of California",
+        description:
+          "Graduated with honors, focused on software engineering and web development.",
+      },
+      {
+        from: "2023-01-01",
+        to: "2023-06-30",
+        title: "React Advanced Bootcamp",
+        description: "Completed an intensive React & Next.js course.",
+      },
+    ],
+    works: [
+      {
+        from: "2022-07-01",
+        to: "2024-09-01",
+        title: "Software Engineer at Google",
+        description:
+          "Developed scalable microservices for Google Cloud Platform. Led a team of 5 engineers.",
+      },
+      {
+        from: "2020-01-01",
+        to: "2022-06-30",
+        title: "Frontend Developer at StartupX",
+        description:
+          "Built React and Next.js apps with real-time features and WebSocket integration.",
+      },
+    ],
+    projects: [
+      {
+        from: "2023-03-01",
+        to: "2023-08-01",
+        title: "E-commerce Platform",
+        description:
+          "Developed a full-stack e-commerce platform with Next.js, Django and Stripe payments integration.",
+      },
+      {
+        from: "2024-01-01",
+        to: "2024-03-01",
+        title: "AI Chatbot",
+        description:
+          "Created a chatbot powered by OpenAI GPT API to automate customer support.",
+      },
+    ],
+    certifications: [
+      {
+        from: "2021-05-01",
+        to: "2021-05-01",
+        title: "AWS Certified Solutions Architect",
+        description:
+          "Earned AWS certification for designing and deploying scalable systems on AWS.",
+      },
+      {
+        from: "2022-08-15",
+        to: "2022-08-15",
+        title: "Google Cloud Professional",
+        description: "Google Cloud Platform Professional Cloud Architect Certification.",
+      },
+    ],
+    hobbies: [
+      {
+        title: "Photography",
+        description: "I enjoy landscape and street photography on weekends.",
+      },
+      {
+        title: "Traveling",
+        description: "Love exploring new cultures and cities.",
+      },
+    ],
     contactdetails: {
-      phone: "",
-      email: "",
-      website: "",
-      github: "",
-      linkedIn: "",
-      twitter: "",
-      instagram: "",
+      phone: "+1 234 567 890",
+      email: "john.doe@example.com",
+      website: "https://johndoe.dev",
+      github: "https://github.com/johndoe",
+      linkedIn: "https://linkedin.com/in/johndoe",
+      twitter: "https://twitter.com/johndoe",
+      instagram: "https://instagram.com/johndoe",
     },
   });
 
-
   const [editIndex, setEditIndex] = useState(null);
-
   const [openDialog, setOpenDialog] = useState(null);
   const [tempData, setTempData] = useState({});
-  const [tempSkill, setTempSkill] = useState("");
-  const [tempSkillParent, setTempSkillParent] = useState("");
 
-
-  const sendData = async () => {
-    //     const formData = {};
-    //     formData.about = resumeData?.about;
-    //     formData.display_name = resumeData?.display_name;
-    //     formData.title = resumeData?.title;
-    // formData.skills = resumeData?.skills;
-    //     if (resumeData?.profilePhoto) {
-    //       formData.profilePhoto = resumeData?.profilePhoto;
-    //     }
-
-    //     ["educations", "works", "projects", "certifications", "hobbies"].forEach(
-    //       (key) => formData[key] = resumeData[key]
-    //     );
-    //     formData.contactdetails = resumeData?.contactdetails;
-
-    console.log(resumeData)
-
-    // try {
-    //   await axios.post("http://localhost:8000/api/resume/edit/2/", formData, {
-    //     headers: {
-    //       "Content-Type": "multipart/form-data",
-    //       Authorization: `Bearer ${localStorage.getItem("accessToken")}`,
-    //     },
-    //   });
-    // } catch (err) {
-    //   console.error("Upload failed", err);
-    // }
-  };
+  const sendData = async () => { console.log(resumeData) };
 
   const handleDialogConfirm = () => {
     if (openDialog && tempData) {
@@ -103,228 +149,96 @@ export default function ResumeContent() {
   return (
 
     <div className="w-3/4 p-6 space-y-6  rounded-lg border">
-      <p className=" ">Edit your resume content</p>
+      <p className="text-sm text-gray-500">Edit your resume content</p>
       <Separator />
       <Accordion type="single" collapsible className="w-full">
-        {/* About */}
         <AccordionItem value="about" className="bg-gray-100 rounded-md px-3 border-none mb-3">
           <AccordionTrigger>About</AccordionTrigger>
-          <AccordionContent className="bg-white p-3 rounded-md mb-3">
-            <Textarea
-              placeholder="Write about yourself"
-              value={resumeData?.about}
-              onChange={(e) => setResumeData({ ...resumeData, about: e.target.value })}
-              className="mb-4"
-            />
-            <Input
-              placeholder="Display Name"
-              value={resumeData?.display_name}
-              onChange={(e) => setResumeData({ ...resumeData, display_name: e.target.value })}
-              className="mb-2"
-            />
-            <Input
-              placeholder="Title"
-              value={resumeData?.title}
-              onChange={(e) => setResumeData({ ...resumeData, title: e.target.value })}
-              className="mb-2"
-            />
-            <Input
-              type="file"
-              accept="image/*"
-              onChange={(e) =>
-                setResumeData({ ...resumeData, profilePhoto: e.target.files?.[0] || null })
-              }
-            />
-            {resumeData?.profilePhoto && (
-              <img
-                src={URL.createObjectURL(resumeData?.profilePhoto)}
-                alt="Profile"
-                className="mt-3 w-24 h-24 object-cover rounded-full border"
-              />
-            )}
+          <AccordionContent>
+            <AboutSection data={resumeData} setData={setResumeData} />
           </AccordionContent>
         </AccordionItem>
-
-        {/* Contact */}
         <AccordionItem value="contact" className="bg-gray-100 rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Contact</AccordionTrigger>
           <AccordionContent className="bg-white p-3 rounded-md mb-3">
-            {resumeData && Object.keys(resumeData?.contactdetails).map((key) => (
-              <Input
-                key={key}
-                placeholder={key}
-                value={resumeData?.contactdetails[key] || ""}
-                onChange={(e) =>
-                  setResumeData({
-                    ...resumeData,
-                    contactdetails: { ...resumeData?.contactdetails, [key]: e.target.value },
-                  })
-                }
-                className="mb-2"
-              />
-            ))}
+            <ContactSection resumeData={resumeData} setResumeData={setResumeData} />
           </AccordionContent>
         </AccordionItem>
-
-        {/* Dynamic Sections */}
-        {[
-          { label: "Educations", key: "educations" },
-          { label: "Work Experiences", key: "works" },
-          { label: "Projects", key: "projects" },
-          { label: "Certifications", key: "certifications" },
-          { label: "Hobbies", key: "hobbies" },
-        ].map((section) => (
-          <AccordionItem key={section.key} value={section.key} className="bg-gray-100 rounded-md px-3 border-none mb-3">
-            <AccordionTrigger>{section.label}</AccordionTrigger>
-            <AccordionContent className="bg-white p-3 rounded-md mb-3">
-              <div className="space-y-3">
-                {resumeData && resumeData[section.key].map((item, idx) => (
-                  <div
-                    key={idx}
-                    className="border p-3 rounded flex justify-between items-center"
-                  >
-                    <div>
-                      <div>{item.title || "Untitled"}</div>
-                      <div className="text-gray-400" >{item.description.substring(0, 50) + "..." || "Untitled"}</div>
-                    </div>
-                    <div className="flex gap-1">
-                      <Trash2
-                        className="text-rose-700 cursor-pointer  border p-1 rounded"
-                        size={26}
-                        onClick={() =>
-                          setResumeData({
-                            ...resumeData,
-                            [section.key]: resumeData[section.key].filter((_, i) => i !== idx),
-                          })
-                        }
-                      >
-                        Remove
-                      </Trash2>
-                      <PencilLine
-                        onClick={() => {
-                          setTempData(item);
-                          setOpenDialog(section.key);
-                          setEditIndex(idx);
-                        }}
-                        className="text-gray-700 cursor-pointer border p-1 rounded" size={26}>
-
-                      </PencilLine>
-                    </div>
-                  </div>
-                ))}
-                <Button variant="outline" onClick={() => setOpenDialog(section.key)}>
-                  + Add {section.label}
-                </Button>
-              </div>
-            </AccordionContent>
-          </AccordionItem>
-        ))}
-
+        <AccordionItem value="educations" className="bg-gray-100 rounded-md px-3 border-none mb-3">
+          <AccordionTrigger>Educations</AccordionTrigger>
+          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+            <EducationSection
+              data={resumeData}
+              setData={setResumeData}
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
+              setTempData={setTempData}
+              setEditIndex={setEditIndex}
+            />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="works" className="bg-gray-100 rounded-md px-3 border-none mb-3">
+          <AccordionTrigger>Work Experiences</AccordionTrigger>
+          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+            <WorkSection
+              data={resumeData}
+              setData={setResumeData}
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
+              setTempData={setTempData}
+              setEditIndex={setEditIndex}
+            />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="projects" className="bg-gray-100 rounded-md px-3 border-none mb-3">
+          <AccordionTrigger>Projects</AccordionTrigger>
+          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+            <ProjectSection
+              data={resumeData}
+              setData={setResumeData}
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
+              setTempData={setTempData}
+              setEditIndex={setEditIndex}
+            />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="certifications" className="bg-gray-100 rounded-md px-3 border-none mb-3">
+          <AccordionTrigger>Certifications</AccordionTrigger>
+          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+            <CertificationSection
+              data={resumeData}
+              setData={setResumeData}
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
+              setTempData={setTempData}
+              setEditIndex={setEditIndex}
+            />
+          </AccordionContent>
+        </AccordionItem>
+        <AccordionItem value="hobbies" className="bg-gray-100 rounded-md px-3 border-none mb-3">
+          <AccordionTrigger>Hobbies</AccordionTrigger>
+          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+            <HobbySection
+              data={resumeData}
+              setData={setResumeData}
+              openDialog={openDialog}
+              setOpenDialog={setOpenDialog}
+              setTempData={setTempData}
+              setEditIndex={setEditIndex}
+            />
+          </AccordionContent>
+        </AccordionItem>
         <AccordionItem key="skills" value="skills" className="bg-gray-100 rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Skills</AccordionTrigger>
           <AccordionContent className="bg-white p-3 rounded-md mb-3">
-            <div className="flex mb-4 items-center">
-              <Input
-                className="w-42"
-                value={tempSkillParent}
-                onChange={(e) => setTempSkillParent(e.target.value)} />
-              <Plus className="bg-primary text-white ms-2 rounded-full" onClick={() => {
-
-                if (Object.keys(resumeData.skills).some(x => x == tempSkillParent.trim().replace(/\s+/g, ' '))) {
-                  alert("exists...")
-                } else {
-                  setResumeData((prev) => ({
-                    ...prev,
-                    skills: {
-                      ...prev.skills,
-                      [tempSkillParent.trim().replace(/\s+/g, ' ')]: [],
-                    },
-                  }));
-                  setTempSkillParent("");
-                }
-
-
-              }} /></div>
-            <div className="space-y-3">
-              <Accordion type="single" collapsible className="w-full">
-                {resumeData && Object.keys(resumeData?.skills).map((x) => {
-                  return <AccordionItem key={x} value={x} className="bg-gray-100 rounded-md px-3 border-none mb-3">
-                    <AccordionTrigger>
-                      {x}
-                    </AccordionTrigger>
-                    <AccordionContent className="bg-white p-3 rounded-md mb-3">
-
-
-                      <span className="flex items-center mb-3 cursor-pointer"        onClick={() => {
-                            setResumeData((prev) => ({ ...prev, skills: Object.fromEntries(Object.entries(resumeData.skills).filter(([key, _]) => key !== x)) }))
-                          }}>
-                        ! Remove whole <span className="font-bold mx-1"> {x} </span> key
-                        {/* <X className="bg-primary text-white me-2 rounded-full w-4 h-4" /> */}
-                      </span>
-
-                      <div className="flex mb-4 items-center">
-                        <Input
-                          className="w-42"
-                          value={tempSkill}
-                          onChange={(e) => setTempSkill(e.target.value)} />
-                        <Plus className="bg-primary text-white ms-2 rounded-full" onClick={() => {
-
-                          if (resumeData.skills[x].some(tmp => tmp == tempSkill.trim().replace(/\s+/g, ' '))) {
-                            alert("exists...")
-                          } else {
-                            setResumeData((prev) => ({
-                              ...prev,
-                              skills: {
-                                ...prev.skills,
-                                [x]: [...prev.skills[x], tempSkill.trim().replace(/\s+/g, ' ')],
-                              },
-                            }));
-                            setTempSkill("");
-                          }
-
-
-                        }} /></div>
-                      {resumeData?.skills[x].map((y) => (
-                        <span
-                          key={y}
-                          className="shadow-sm border me-1 rounded-full px-2 py-1 items-center gap-1  "
-                        >
-                          {y}
-
-                          <span className="cursor-pointer text-rose-500  ms-1"
-                            onClick={() => {
-                              setResumeData((prev) => ({
-                                ...prev,
-                                skills: {
-                                  ...prev.skills,
-                                  [x]: prev.skills[x].filter((skill) => skill !== y),
-                                },
-                              }));
-                              setTempSkill("");
-                            }}>
-                            x
-                          </span>
-
-                        </span>
-                      ))}
-
-                    </AccordionContent>
-                  </AccordionItem>
-                })}
-
-              </Accordion>
-            </div>
+            <SkillsSection data={resumeData} setData={setResumeData} />
           </AccordionContent>
         </AccordionItem>
-
-
       </Accordion>
-
       <Button onClick={sendData} className="">
         Save Changes
       </Button>
-
-      {/* Dialog */}
       <Dialog open={!!openDialog} onOpenChange={() => setOpenDialog(null)}>
         <DialogContent>
           <DialogHeader>
@@ -336,6 +250,26 @@ export default function ResumeContent() {
             onChange={(e) => setTempData({ ...tempData, title: e.target.value })}
             className="mb-2"
           />
+          {openDialog !== "hobbies" && (
+            <div className="flex gap-4 mb-2">
+              <div className="flex flex-col w-1/2">
+                <label className="text-sm text-gray-600 mb-1">From</label>
+                <Input
+                  type="date"
+                  value={tempData.from || ""}
+                  onChange={(e) => setTempData({ ...tempData, from: e.target.value })}
+                />
+              </div>
+              <div className="flex flex-col w-1/2">
+                <label className="text-sm text-gray-600 mb-1">To</label>
+                <Input
+                  type="date"
+                  value={tempData.to || ""}
+                  onChange={(e) => setTempData({ ...tempData, to: e.target.value })}
+                />
+              </div>
+            </div>
+          )}
           <Textarea
             placeholder="Description"
             value={tempData.description || ""}
@@ -351,6 +285,5 @@ export default function ResumeContent() {
         </DialogContent>
       </Dialog>
     </div>
-
   );
 }
