@@ -1,22 +1,23 @@
 "use client"
-import { Geist, Geist_Mono } from "next/font/google";
-import "./globals.css";
-import {Botton} from "@/components/ui/button"
-import { AppSidebar } from "@/components/app-sidebar"
-import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar"
-import { SessionProvider } from "next-auth/react";
-
-
+import "./globals.css"
+import { SessionProvider } from "next-auth/react"
+import { ThemeProvider } from "@/components/theme-provider"
 
 export default function RootLayout({ children }) {
   return (
-    <html lang="en">
+    <html lang="en" suppressHydrationWarning>
       <body>
         <SessionProvider>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             {children}
+          </ThemeProvider>
         </SessionProvider>
-      
       </body>
     </html>
-  );
+  )
 }
