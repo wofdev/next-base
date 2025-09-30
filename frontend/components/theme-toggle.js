@@ -16,9 +16,9 @@ export function ThemeToggle() {
       className=" w-10 h-10 flex items-center justify-center"
     >
       {theme === "dark" ? (
-        <Sun className="h-5 w-5 text-black dark:text-white" />
+        <Sun className="h-5 w-5 text-white" />
       ) : (
-        <Moon className="h-5 w-5 text-black dark:text-white" />
+        <Moon className="h-5 w-5 text-black" />
       )}
     </span>
   )
