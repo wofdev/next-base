@@ -5,24 +5,24 @@ import { Textarea } from "@/components/ui/textarea";
 
 export default function AboutSection({ data, setData }) {
   return (
-    <div className="bg-white p-3 rounded-md mb-3">
+    <div className=" p-3 rounded-md mb-3">
       <Textarea
         placeholder="Write about yourself"
         value={data.titleData.about}
         onChange={(e) => setData({ ...data, titleData:{...data.titleData,about: e.target.value}})}
-        className="mb-4"
+        className=" border-none dark:bg-gray-400 bg-gray-200 mb-4"
       />
       <Input
         placeholder="Display Name"
         value={data.titleData.display_name}
         onChange={(e) => setData({ ...data, titleData:{...data.titleData, display_name: e.target.value }})}
-        className="mb-2"
+        className=" border-none dark:bg-gray-400 bg-gray-200 mb-2"
       />
       <Input
         placeholder="Title"
         value={data.titleData.title}
         onChange={(e) => setData({ ...data, titleData:{...data.titleData, title: e.target.value }})}
-        className="mb-2"
+        className=" border-none dark:bg-gray-400 bg-gray-200 mb-2"
       />
       <Input
         type="file"
@@ -30,12 +30,13 @@ export default function AboutSection({ data, setData }) {
         onChange={(e) =>
           setData({ ...data,titleData:{...data.titleData, profilePhoto: e.target.files?.[0] || null }})
         }
+        className=" border-none dark:bg-gray-400 bg-gray-200 "
       />
       {data?.profilePhoto && (
         <img
           src={URL.createObjectURL(data.titleData.profilePhoto)}
           alt="Profile"
-          className="mt-3 w-24 h-24 object-cover rounded-full border"
+          className=" border-none dark:bg-gray-400 bg-gray-200 mt-3 w-24 h-24 object-cover rounded-full border"
         />
       )}
     </div>

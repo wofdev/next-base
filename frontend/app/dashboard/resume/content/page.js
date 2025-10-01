@@ -148,25 +148,25 @@ export default function ResumeContent() {
 
   return (
 
-    <div className="w-3/4 p-6 space-y-6  rounded-lg border">
-      <p className="text-sm text-gray-500">Edit your resume content</p>
+    <div className="w-3/4 p-6 space-y-6  rounded-lg">
+      <p className="text-sm text-gray-400">Edit your resume content</p>
       <Separator />
       <Accordion type="single" collapsible className="w-full">
-        <AccordionItem value="about" className="dark:bg-gray-500 bg-gray-400 rounded-md px-3 border-none mb-3">
+        <AccordionItem value="about" className="dark:bg-gray-500 bg-gray-50 text-black rounded-md px-3 border-none mb-3">
           <AccordionTrigger>About</AccordionTrigger>
           <AccordionContent>
             <AboutSection data={resumeData} setData={setResumeData} />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="contact" className="dark:bg-gray-500 bg-gray-400 rounded-md px-3 border-none mb-3">
+        <AccordionItem value="contact" className="dark:bg-gray-500 bg-gray-50 text-black rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Contact</AccordionTrigger>
-          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+          <AccordionContent className=" p-3 rounded-md mb-3">
             <ContactSection resumeData={resumeData} setResumeData={setResumeData} />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="educations" className="dark:bg-gray-500 bg-gray-400 rounded-md px-3 border-none mb-3">
+        <AccordionItem value="educations" className="dark:bg-gray-500 bg-gray-50 text-black rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Educations</AccordionTrigger>
-          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+          <AccordionContent className=" p-3 rounded-md mb-3">
             <EducationSection
               data={resumeData}
               setData={setResumeData}
@@ -177,9 +177,9 @@ export default function ResumeContent() {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="works" className="dark:bg-gray-500 bg-gray-400 rounded-md px-3 border-none mb-3">
+        <AccordionItem value="works" className="dark:bg-gray-500 bg-gray-50 text-black rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Work Experiences</AccordionTrigger>
-          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+          <AccordionContent className=" p-3 rounded-md mb-3">
             <WorkSection
               data={resumeData}
               setData={setResumeData}
@@ -190,9 +190,9 @@ export default function ResumeContent() {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="projects" className="dark:bg-gray-500 bg-gray-400 rounded-md px-3 border-none mb-3">
+        <AccordionItem value="projects" className="dark:bg-gray-500 bg-gray-50 text-black rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Projects</AccordionTrigger>
-          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+          <AccordionContent className=" p-3 rounded-md mb-3">
             <ProjectSection
               data={resumeData}
               setData={setResumeData}
@@ -203,9 +203,9 @@ export default function ResumeContent() {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="certifications" className="dark:bg-gray-500 bg-gray-400 rounded-md px-3 border-none mb-3">
+        <AccordionItem value="certifications" className="dark:bg-gray-500 bg-gray-50 text-black rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Certifications</AccordionTrigger>
-          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+          <AccordionContent className=" p-3 rounded-md mb-3">
             <CertificationSection
               data={resumeData}
               setData={setResumeData}
@@ -216,9 +216,9 @@ export default function ResumeContent() {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem value="hobbies" className="dark:bg-gray-500 bg-gray-400 rounded-md px-3 border-none mb-3">
+        <AccordionItem value="hobbies" className="dark:bg-gray-500 bg-gray-50 text-black rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Hobbies</AccordionTrigger>
-          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+          <AccordionContent className=" p-3 rounded-md mb-3">
             <HobbySection
               data={resumeData}
               setData={setResumeData}
@@ -229,9 +229,9 @@ export default function ResumeContent() {
             />
           </AccordionContent>
         </AccordionItem>
-        <AccordionItem key="skills" value="skills" className="dark:bg-gray-500 bg-gray-400 rounded-md px-3 border-none mb-3">
+        <AccordionItem key="skills" value="skills" className="dark:bg-gray-500 bg-gray-50 text-black rounded-md px-3 border-none mb-3">
           <AccordionTrigger>Skills</AccordionTrigger>
-          <AccordionContent className="bg-white p-3 rounded-md mb-3">
+          <AccordionContent className=" p-3 rounded-md mb-3">
             <SkillsSection data={resumeData} setData={setResumeData} />
           </AccordionContent>
         </AccordionItem>

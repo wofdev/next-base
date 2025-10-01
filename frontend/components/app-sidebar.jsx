@@ -54,9 +54,9 @@ export function AppSidebar() {
   const { data: session, status } = useSession();
 
   return (
-    <Sidebar>
+    <Sidebar className="border-none">
       {/* <SidebarHeader /> */}
-      <SidebarContent  className="dark:bg-black dark:text-white bg-white text-black">
+      <SidebarContent  className="dark:bg-gray-900 dark:text-white bg-gray-50 text-black">
         <SidebarGroup>
           <SidebarGroupLabel>
             <Link href="/" className="text-gray-400">TopCV</Link>
@@ -77,7 +77,7 @@ export function AppSidebar() {
           </SidebarGroupContent>
         </SidebarGroup>
       </SidebarContent>
-      <SidebarFooter  className="dark:bg-black dark:text-white bg-white text-black">
+      <SidebarFooter  className="dark:bg-gray-900 dark:text-white bg-gray-50 text-black">
         <SidebarMenu>
           <SidebarMenuItem>
             <DropdownMenu>

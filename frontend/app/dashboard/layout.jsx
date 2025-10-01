@@ -9,7 +9,7 @@ export default function DashboardLayout({ children }) {
       <div className="flex min-h-screen w-full">
         <AppSidebar />
         <div className="flex flex-1 flex-col">
-          <header className="sticky top-0 z-50 flex items-center justify-between shadow-sm bg-white dark:bg-black px-4">
+          <header className="sticky top-0 z-50 flex items-center justify-between bg-gray-50 dark:bg-gray-900 px-4">
             <SidebarTrigger className="text-black dark:text-white"/>
             <ThemeToggle />
           </header>

@@ -181,7 +181,7 @@ export default function ResumePreview() {
         <div className={`flex justify-between items-center mb-8 ${isVisible ? "animate-slide-in-up" : "opacity-0"}`}>
           <div>
             <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 bg-clip-text text-transparent mb-2">
-              Resume Preview
+            Preview Preview
             </h1>
             <p className="text-gray-600 dark:text-gray-400">Professional • Modern • Impressive</p>
           </div>
