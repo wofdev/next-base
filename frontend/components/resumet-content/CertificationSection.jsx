@@ -16,17 +16,17 @@ export default function CertificationSection({
       {data.certifications.map((item, idx) => (
         <div
           key={idx}
-          className="border p-3 rounded flex justify-between items-center"
+          className="p-3 rounded flex justify-between items-center  dark:bg-gray-400 bg-gray-200"
         >
           <div>
             <div>{item.title || "Untitled"}</div>
-            <div className="text-gray-400">
+            <div className="">
               {item.description?.substring(0, 50) + "..." || "Untitled"}
             </div>
           </div>
           <div className="flex gap-1">
             <Trash2
-              className="text-rose-700 cursor-pointer  border p-1 rounded"
+              className="bg-rose-700 cursor-pointer text-white p-1 rounded"
               size={26}
               onClick={() =>
                 setData({
@@ -41,14 +41,14 @@ export default function CertificationSection({
                 setOpenDialog("certifications");
                 setEditIndex(idx);
               }}
-              className="text-gray-700 cursor-pointer border p-1 rounded"
+              className="cursor-pointer p-1 rounded text-white bg-gray-700"
               size={26}
             />
           </div>
         </div>
       ))}
 
-      <Button variant="outline" onClick={() => setOpenDialog("certifications")}>
+      <Button onClick={() => setOpenDialog("certifications")}>
         + Add
       </Button>
     </div>
