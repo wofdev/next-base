@@ -10,17 +10,18 @@ import {
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
+import { Badge } from "../ui/badge";
 
 export default function SkillsSection({ data, setData }) {
   const [tempSkillParent, setTempSkillParent] = useState("");
   const [tempSkill, setTempSkill] = useState("");
 
   return (
-    <div className="bg-white p-3 rounded-md mb-3">
+    <div className="bg-white dark:bg-black p-3 rounded-md mb-3">
       {/* Add New Skill Category */}
-      <div className="flex mb-4 items-center">
+      {/* <div className="flex mb-4 items-center">
         <Input
-          className="w-42"
+          className="w-42  dark:bg-gray-300 bg-gray-200 mb-4"
           value={tempSkillParent}
           onChange={(e) => setTempSkillParent(e.target.value)}
           placeholder="New Skill Category"
@@ -43,7 +44,34 @@ export default function SkillsSection({ data, setData }) {
             }
           }}
         />
+      </div> */}
+      <div className="flex items-center mb-4">
+        <Input
+          className="w-42 dark:bg-gray-300 bg-gray-200"
+          value={tempSkillParent}
+          onChange={(e) => setTempSkillParent(e.target.value)}
+          placeholder="New Skill Category"
+        />
+        <Plus
+          className="bg-primary text-white ms-2 rounded-full cursor-pointer "
+          onClick={() => {
+            const newCategory = tempSkillParent.trim().replace(/\s+/g, " ");
+            if (Object.keys(data.skills).includes(newCategory)) {
+              alert("This category already exists.");
+            } else if (newCategory) {
+              setData((prev) => ({
+                ...prev,
+                skills: {
+                  ...prev.skills,
+                  [newCategory]: [],
+                },
+              }));
+              setTempSkillParent("");
+            }
+          }}
+        />
       </div>
+
 
       {/* Skills Accordion */}
       <div className="space-y-3">
@@ -52,10 +80,10 @@ export default function SkillsSection({ data, setData }) {
             <AccordionItem
               key={category}
               value={category}
-              className="bg-gray-100 rounded-md px-3 border-none mb-3"
+              className="dark:bg-gray-500 bg-gray-100 text-black border-none rounded-md px-3 mb-3"
             >
               <AccordionTrigger>{category}</AccordionTrigger>
-              <AccordionContent className="bg-white p-3 rounded-md mb-3">
+              <AccordionContent className="bg-gray-300 p-3 rounded-md mb-3">
                 <span
                   className="flex items-center mb-3 cursor-pointer"
                   onClick={() =>
@@ -76,7 +104,7 @@ export default function SkillsSection({ data, setData }) {
                 {/* Add skill to category */}
                 <div className="flex mb-4 items-center">
                   <Input
-                    className="w-42"
+                    className="w-42  dark:bg-gray-300 bg-gray-200 "
                     value={tempSkill}
                     onChange={(e) => setTempSkill(e.target.value)}
                     placeholder="Add Skill"
@@ -103,13 +131,13 @@ export default function SkillsSection({ data, setData }) {
 
                 {/* Skills chips */}
                 {data.skills[category].map((skill) => (
-                  <span
+                  <Badge
                     key={skill}
-                    className="shadow-sm border me-1 rounded-full px-2 py-1 items-center gap-1"
+                    className="shadow-sm me-1 rounded-full px-2 py-1 items-center gap-1"
                   >
                     {skill}
                     <span
-                      className="cursor-pointer text-rose-500 ms-1"
+                      className="cursor-pointer text-white ms-1"
                       onClick={() =>
                         setData((prev) => ({
                           ...prev,
@@ -124,7 +152,7 @@ export default function SkillsSection({ data, setData }) {
                     >
                       x
                     </span>
-                  </span>
+                  </Badge>
                 ))}
               </AccordionContent>
             </AccordionItem>

@@ -30,7 +30,7 @@ export default function AboutSection({ data, setData }) {
         onChange={(e) =>
           setData({ ...data,titleData:{...data.titleData, profilePhoto: e.target.files?.[0] || null }})
         }
-        className=" border-none dark:bg-gray-400 bg-gray-200 "
+        className=" border-none dark:bg-gray-400 bg-gray-200 text-back"
       />
       {data?.profilePhoto && (
         <img

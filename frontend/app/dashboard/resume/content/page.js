@@ -240,7 +240,7 @@ export default function ResumeContent() {
         Save Changes
       </Button>
       <Dialog open={!!openDialog} onOpenChange={() => setOpenDialog(null)}>
-        <DialogContent>
+        <DialogContent className="bg-gray-300 dark:bg-black">
           <DialogHeader>
             <DialogTitle>Add {openDialog}</DialogTitle>
           </DialogHeader>
@@ -248,13 +248,14 @@ export default function ResumeContent() {
             placeholder="Title"
             value={tempData.title || ""}
             onChange={(e) => setTempData({ ...tempData, title: e.target.value })}
-            className="mb-2"
+            className="!bg-gray-300 mb-2"
           />
           {openDialog !== "hobbies" && (
             <div className="flex gap-4 mb-2">
               <div className="flex flex-col w-1/2">
                 <label className="text-sm text-gray-600 mb-1">From</label>
                 <Input
+                className="!bg-gray-300"
                   type="date"
                   value={tempData.from || ""}
                   onChange={(e) => setTempData({ ...tempData, from: e.target.value })}
@@ -263,6 +264,7 @@ export default function ResumeContent() {
               <div className="flex flex-col w-1/2">
                 <label className="text-sm text-gray-600 mb-1">To</label>
                 <Input
+                className="!bg-gray-300"
                   type="date"
                   value={tempData.to || ""}
                   onChange={(e) => setTempData({ ...tempData, to: e.target.value })}
@@ -274,7 +276,7 @@ export default function ResumeContent() {
             placeholder="Description"
             value={tempData.description || ""}
             onChange={(e) => setTempData({ ...tempData, description: e.target.value })}
-            className="mb-2"
+            className="!bg-gray-300 mb-2"
           />
           <DialogFooter>
             <Button variant="outline" onClick={() => setOpenDialog(null)}>
