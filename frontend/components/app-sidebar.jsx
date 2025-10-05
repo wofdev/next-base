@@ -90,9 +90,9 @@ export function AppSidebar() {
               </DropdownMenuTrigger>
               <DropdownMenuContent
                 side="top"
-                className="w-[--radix-popper-anchor-width]"
+                className="w-[--radix-popper-anchor-width] bg-white text-black border-gray-300 dark:bg-black dark:text-white"
               >
-                <DropdownMenuItem onClick={() => signOut({ callbackUrl: "/" })}>
+                <DropdownMenuItem className="" onClick={() => signOut({ callbackUrl: "/" })}>
                   Sign out
                 </DropdownMenuItem>
               </DropdownMenuContent>

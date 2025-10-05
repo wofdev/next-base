@@ -15,7 +15,7 @@ export default function ContactSection({resumeData,setResumeData}) {
                     contactdetails: { ...resumeData?.contactdetails, [key]: e.target.value },
                   })
                 }
-                className="mb-2 border-none dark:bg-gray-400 bg-gray-200"
+                className="mb-2 dark:bg-gray-400 bg-gray-50"
               />
             ))}
     </div>
