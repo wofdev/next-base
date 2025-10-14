@@ -123,8 +123,6 @@ export default function ResumeContent() {
     },
   });
 
-
-
   const [editIndex, setEditIndex] = useState(null);
   const [openDialog, setOpenDialog] = useState(null);
   const [tempData, setTempData] = useState({});

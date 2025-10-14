@@ -9,13 +9,13 @@ export default function AboutSection({ data, setData }) {
   useEffect(() => {
     const getdata = async () => {
       const res = await axios.get('http://localhost:8000/api/title-data/');
-      console.log(res.data)
       setData(prev => ({ 
         ...prev, 
         titleData: {
            ...prev.titleData, 
            about: res.data.about,
-           title: res.data.title
+           title: res.data.title,
+           display_name: res.data.display_name,
           } }))
     }
     getdata();
