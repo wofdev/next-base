@@ -1,5 +1,5 @@
 "use client";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
 import {
   Accordion,
@@ -26,6 +26,7 @@ import ProjectSection from "@/components/resumet-content/ProjectSection";
 import CertificationSection from "@/components/resumet-content/CertificationSection";
 import HobbySection from "@/components/resumet-content/HobbySection";
 import SkillsSection from "@/components/resumet-content/SkillSection";
+
 export default function ResumeContent() {
   const [resumeData, setResumeData] = useState({
     titleData: {
@@ -121,6 +122,8 @@ export default function ResumeContent() {
       instagram: "https://instagram.com/johndoe",
     },
   });
+
+
 
   const [editIndex, setEditIndex] = useState(null);
   const [openDialog, setOpenDialog] = useState(null);

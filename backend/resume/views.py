@@ -30,7 +30,7 @@ class TitleDataAPIView(APIView):
 
     def put(self, request):
         try:
-            title_data = TitleData.objects.get(user=request.user)
+            title_data = TitleData.objects.get(user=User.objects.get(id=1))
         except TitleData.DoesNotExist:
             return Response({"detail": "TitleData not found."}, status=status.HTTP_404_NOT_FOUND)
 
