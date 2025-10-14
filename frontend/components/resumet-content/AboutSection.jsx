@@ -4,6 +4,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { useEffect } from "react";
 import axios from "axios";
+import { Button } from "../ui/button";
 export default function AboutSection({ data, setData }) {
 
   useEffect(() => {
@@ -21,25 +22,29 @@ export default function AboutSection({ data, setData }) {
     getdata();
   }, [])
 
+  const sendAboutData = async () => {
+    await axios.post('http://localhost:8000/api/title-data/',data.titleData);
+  }
+
   return (
-    <div className=" p-3 rounded-md mb-3">
+    <div className="flex flex-wrap p-3 rounded-md gap-2">
       <Textarea
         placeholder="Write about yourself"
         value={data.titleData.about}
         onChange={(e) => setData({ ...data, titleData: { ...data.titleData, about: e.target.value } })}
-        className=" dark:bg-gray-400 bg-gray-50 mb-4"
+        className="w-full dark:bg-gray-400 bg-gray-50"
       />
       <Input
         placeholder="Display Name"
         value={data.titleData.display_name}
         onChange={(e) => setData({ ...data, titleData: { ...data.titleData, display_name: e.target.value } })}
-        className=" dark:bg-gray-400 bg-gray-50 mb-2"
+        className="w-full dark:bg-gray-400 bg-gray-50"
       />
       <Input
         placeholder="Title"
         value={data.titleData.title}
         onChange={(e) => setData({ ...data, titleData: { ...data.titleData, title: e.target.value } })}
-        className=" dark:bg-gray-400 bg-gray-50 mb-2"
+        className="w-full dark:bg-gray-400 bg-gray-50"
       />
       <Input
         type="file"
@@ -47,15 +52,18 @@ export default function AboutSection({ data, setData }) {
         onChange={(e) =>
           setData({ ...data, titleData: { ...data.titleData, profilePhoto: e.target.files?.[0] || null } })
         }
-        className=" dark:bg-gray-400 bg-gray-50 text-back"
+        className="w-full dark:bg-gray-400 bg-gray-50 text-back"
       />
       {data?.profilePhoto && (
         <img
           src={URL.createObjectURL(data.titleData.profilePhoto)}
           alt="Profile"
-          className=" dark:bg-gray-400 bg-gray-50 mt-3 w-24 h-24 object-cover rounded-full border"
+          className="w-full dark:bg-gray-400 bg-gray-50 w-24 h-24 object-cover rounded-full border"
         />
       )}
+      <Button onClick={sendAboutData}>
+        save About section
+      </Button>
     </div>
   );
 }
