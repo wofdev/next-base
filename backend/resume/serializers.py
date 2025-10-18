@@ -1,13 +1,29 @@
 from rest_framework import serializers
-from .models import TitleData, Education
+from .models import Title, Contact ,Education
+from django.contrib.auth.models import User
 
-class TitleDataSerializer(serializers.ModelSerializer):
+class TitleSerializer(serializers.ModelSerializer):
     class Meta:
-        model = TitleData
-        fields =  ["id", "about", "title", "display_name"]
+        model = Title
+        fields = "__all__"
 
-class EducationDataSerializer(serializers.ModelSerializer):
+class ContactSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Contact
+        fields = "__all__"
+
+class EducationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Education
         fields = "__all__"
+
+class ResumeSerializer(serializers.ModelSerializer):
+
+    title = TitleSerializer()
+    contact = ContactSerializer()
+    educations = EducationSerializer(many=True)
+
+    class Meta:
+        model = User
+        fields = ["username", "title", "contact", "educations"]
         

@@ -127,7 +127,12 @@ export default function ResumeContent() {
   const [openDialog, setOpenDialog] = useState(null);
   const [tempData, setTempData] = useState({});
 
-  const sendData = async () => { console.log(resumeData) };
+  useEffect(()=>{
+    const get_data = async () => {
+      let res = await axios.get()
+    }
+    get_data();
+  },[])
 
   const handleDialogConfirm = () => {
     if (openDialog && tempData) {
@@ -151,6 +156,9 @@ export default function ResumeContent() {
 
     <div className="w-3/4 p-6 space-y-6  rounded-lg">
       <p className="text-sm text-gray-400">Edit your resume content</p>
+      <Button onClick={sendData}>
+        SAVE DATA
+      </Button>
       <Separator />
       <Accordion type="single" collapsible className="w-full">
         <AccordionItem value="about" className="dark:bg-gray-500 bg-gray-100 text-black rounded-md px-3 mb-3 border-none">
@@ -237,9 +245,7 @@ export default function ResumeContent() {
           </AccordionContent>
         </AccordionItem>
       </Accordion>
-      <Button onClick={sendData} className="">
-        Save Changes
-      </Button>
+
       <Dialog open={!!openDialog} onOpenChange={() => setOpenDialog(null)}>
         <DialogContent className="bg-gray-50 dark:bg-black">
           <DialogHeader>

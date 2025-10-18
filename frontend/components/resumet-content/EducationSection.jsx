@@ -2,9 +2,6 @@
 "use client";
 import { Button } from "@/components/ui/button";
 import { PencilLine, Trash2 } from "lucide-react";
-import { useEffect } from "react";
-import axios from "axios";
-
 
 export default function EducationSection({
   data,
@@ -14,21 +11,6 @@ export default function EducationSection({
   setTempData,
   setEditIndex,
 }) {
-
-  useEffect(() => {
-    const getdata = async () => {
-      const res = await axios.get('http://localhost:8000/api/education-data/');
-      setData(prev => ({ 
-        ...prev, 
-        educations: res.data.map((x=>({
-                  from: x.from_date,
-        to: x.to_date,
-        title: x.title,
-        description:x.description
-        }))) }))
-    }
-    getdata();
-  }, [])
 
   return (
     <div className="space-y-3">

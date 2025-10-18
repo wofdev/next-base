@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 
-class TitleData(models.Model):
+class Title(models.Model):
     about = models.TextField()
     title = models.CharField(max_length=255)
     display_name = models.CharField(max_length=255, blank=True)
@@ -12,6 +12,22 @@ class TitleData(models.Model):
 
     def __str__(self):
         return self.display_name or self.title
+
+class Contact(models.Model):
+    phone = models.CharField(max_length=11)
+    email = models.CharField(max_length=255)
+    website = models.CharField(max_length=255)
+    github = models.CharField(max_length=255)
+    linkedin = models.CharField(max_length=255)
+    twitter = models.CharField(max_length=255)
+    instagram = models.CharField(max_length=255)
+
+    user = models.OneToOneField(
+        User, on_delete=models.CASCADE
+    )
+
+    def __str__(self):
+        return self.phone
 
 class Education(models.Model):
     from_date = models.DateField()
