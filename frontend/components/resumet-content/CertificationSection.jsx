@@ -4,16 +4,15 @@ import { Button } from "@/components/ui/button";
 import { PencilLine, Trash2 } from "lucide-react";
 
 export default function CertificationSection({
-  data,
-  setData,
-  openDialog,
+  resumeData,
+  setResumeData,
   setOpenDialog,
   setTempData,
   setEditIndex,
 }) {
   return (
     <div className="space-y-3">
-      {data.certifications.map((item, idx) => (
+      {resumeData.certifications.map((item, idx) => (
         <div
           key={idx}
           className="p-3 rounded flex justify-between items-center  dark:bg-gray-400 bg-gray-200"
@@ -29,9 +28,9 @@ export default function CertificationSection({
               className="bg-rose-700 cursor-pointer text-white p-1 rounded"
               size={26}
               onClick={() =>
-                setData({
-                  ...data,
-                  certifications: data.certifications.filter((_, i) => i !== idx),
+                setResumeData({
+                  ...resumeData,
+                  certifications: resumeData.certifications.filter((_, i) => i !== idx),
                 })
               }
             />

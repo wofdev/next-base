@@ -4,8 +4,8 @@ import { Button } from "@/components/ui/button";
 import { PencilLine, Trash2 } from "lucide-react";
 
 export default function WorkSection({
-  data,
-  setData,
+  resumeData,
+  setResumeData,
   openDialog,
   setOpenDialog,
   setTempData,
@@ -13,7 +13,7 @@ export default function WorkSection({
 }) {
   return (
     <div className="space-y-3">
-      {data.works.map((item, idx) => (
+      {resumeData.works.map((item, idx) => (
         <div
           key={idx}
           className=" p-3 rounded flex justify-between items-center  dark:bg-gray-400 bg-gray-200"
@@ -29,9 +29,9 @@ export default function WorkSection({
               className="bg-rose-700 cursor-pointer text-white p-1 rounded"
               size={26}
               onClick={() =>
-                setData({
-                  ...data,
-                  works: data.works.filter((_, i) => i !== idx),
+                setResumeData({
+                  ...resumeData,
+                  works: resumeData.works.filter((_, i) => i !== idx),
                 })
               }
             />

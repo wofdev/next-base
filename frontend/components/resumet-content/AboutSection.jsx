@@ -1,45 +1,69 @@
-// components/resume/AboutSection.jsx
 "use client";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
-import { Button } from "../ui/button";
-export default function AboutSection({ data, setData }) {
+import { Button } from "@/components/ui/button";
+import { Label } from "@/components/ui/label";
 
+export default function AboutSection({ resumeData, setResumeData }) {
   return (
-    <div className="flex flex-wrap p-3 rounded-md gap-2">
-      <Textarea
-        placeholder="Write about yourself"
-        value={data.title.about}
-        onChange={(e) => setData({ ...data, title: { ...data.title, about: e.target.value } })}
-        className="w-full dark:bg-gray-400 bg-gray-50"
-      />
-      <Input
-        placeholder="Display Name"
-        value={data.title.display_name}
-        onChange={(e) => setData({ ...data, title: { ...data.title, display_name: e.target.value } })}
-        className="w-full dark:bg-gray-400 bg-gray-50"
-      />
-      <Input
-        placeholder="Title"
-        value={data.title.title}
-        onChange={(e) => setData({ ...data, title: { ...data.title, title: e.target.value } })}
-        className="w-full dark:bg-gray-400 bg-gray-50"
-      />
-      <Input
-        type="file"
-        accept="image/*"
-        onChange={(e) =>
-          setData({ ...data, title: { ...data.title, profilePhoto: e.target.files?.[0] || null } })
-        }
-        className="w-full dark:bg-gray-400 bg-gray-50 text-back"
-      />
-      {data?.profilePhoto && (
-        <img
-          src={URL.createObjectURL(data.title.profilePhoto)}
-          alt="Profile"
-          className="w-full dark:bg-gray-400 bg-gray-50 w-24 h-24 object-cover rounded-full border"
+    <div className="flex flex-col gap-4 p-3 rounded-md">
+      <div>
+        <Label className="mb-2" >About</Label>
+        <Textarea
+          placeholder="Write about yourself"
+          value={resumeData.title.about}
+          onChange={(e) =>
+            setResumeData({ ...resumeData, title: { ...resumeData.title, about: e.target.value } })
+          }
+          className="w-full dark:bg-gray-400 bg-gray-50"
         />
-      )}
+      </div>
+
+      <div>
+        <Label className="mb-2" >Display Name</Label>
+        <Input
+          placeholder="Display Name"
+          value={resumeData.title.display_name}
+          onChange={(e) =>
+            setResumeData({ ...resumeData, title: { ...resumeData.title, display_name: e.target.value } })
+          }
+          className="w-full dark:bg-gray-400 bg-gray-50"
+        />
+      </div>
+
+      <div>
+        <Label className="mb-2" >Title</Label>
+        <Input
+          placeholder="Title"
+          value={resumeData.title.title}
+          onChange={(e) =>
+            setResumeData({ ...resumeData, title: { ...resumeData.title, title: e.target.value } })
+          }
+          className="w-full dark:bg-gray-400 bg-gray-50"
+        />
+      </div>
+
+      <div>
+        <Label className="mb-2" >Profile Photo</Label>
+        <Input
+          type="file"
+          accept="image/*"
+          onChange={(e) =>
+            setResumeData({
+              ...resumeData,
+              title: { ...resumeData.title, profilePhoto: e.target.files?.[0] || null },
+            })
+          }
+          className="w-full dark:bg-gray-400 bg-gray-50"
+        />
+        {resumeData.title?.profilePhoto && (
+          <img
+            src={URL.createObjectURL(resumeData.title.profilePhoto)}
+            alt="Profile"
+            className="mt-2 w-24 h-24 object-cover rounded-full border"
+          />
+        )}
+      </div>
     </div>
   );
 }

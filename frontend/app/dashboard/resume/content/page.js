@@ -43,16 +43,17 @@ export default function ResumeContent() {
   },[])
 
   const handleDialogConfirm = () => {
+    setTempData({...tempData,user:1})
     if (openDialog && tempData) {
       if (editIndex !== null) {
         const updatedSection = [...resumeData[openDialog]];
-        updatedSection[editIndex] = tempData;
+        updatedSection[editIndex] = {...tempData,user:1};
         setResumeData({ ...resumeData, [openDialog]: updatedSection });
         setEditIndex(null);
       } else {
         setResumeData({
           ...resumeData,
-          [openDialog]: [...resumeData[openDialog], tempData],
+          [openDialog]: [...resumeData[openDialog], {...tempData,user:1}],
         });
       }
     }
@@ -60,10 +61,15 @@ export default function ResumeContent() {
     setOpenDialog(null);
   };
 
+  const sendData = async () => {
+    console.log(resumeData)
+    let res = await axios.post("http://localhost:8000/api/resume-data/",resumeData)
+  }
+
   return (
     <div className="w-3/4 p-6 space-y-6  rounded-lg">
-      <p className="text-sm text-gray-400">Edit your resume content</p>
-      <Button>
+      <p className="text-sm text-gray-400" onClick={()=>{console.log(resumeData)}}>Edit your resume content</p>
+      <Button onClick={sendData}>
         SAVE DATA
       </Button>
       <Separator />
@@ -71,7 +77,7 @@ export default function ResumeContent() {
         <AccordionItem value="about" className="dark:bg-gray-500 bg-gray-100 text-black rounded-md px-3 mb-3 border-none">
           <AccordionTrigger>About</AccordionTrigger>
           <AccordionContent>
-            <AboutSection data={resumeData} setData={setResumeData} />
+            <AboutSection resumeData={resumeData} setResumeData={setResumeData} />
           </AccordionContent>
         </AccordionItem>
         <AccordionItem value="contact" className="dark:bg-gray-500 bg-gray-100 text-black rounded-md px-3 mb-3 border-none">
@@ -84,8 +90,8 @@ export default function ResumeContent() {
           <AccordionTrigger>Educations</AccordionTrigger>
           <AccordionContent className=" p-3 rounded-md mb-3">
             <EducationSection
-              data={resumeData}
-              setData={setResumeData}
+              resumeData={resumeData}
+              setResumeData={setResumeData}
               openDialog={openDialog}
               setOpenDialog={setOpenDialog}
               setTempData={setTempData}
@@ -97,8 +103,8 @@ export default function ResumeContent() {
           <AccordionTrigger>Work Experiences</AccordionTrigger>
           <AccordionContent className=" p-3 rounded-md mb-3">
             <WorkSection
-              data={resumeData}
-              setData={setResumeData}
+              resumeData={resumeData}
+              setResumeData={setResumeData}
               openDialog={openDialog}
               setOpenDialog={setOpenDialog}
               setTempData={setTempData}
@@ -110,8 +116,8 @@ export default function ResumeContent() {
           <AccordionTrigger>Projects</AccordionTrigger>
           <AccordionContent className=" p-3 rounded-md mb-3">
             <ProjectSection
-              data={resumeData}
-              setData={setResumeData}
+              resumeData={resumeData}
+              setResumeData={setResumeData}
               openDialog={openDialog}
               setOpenDialog={setOpenDialog}
               setTempData={setTempData}
@@ -123,8 +129,8 @@ export default function ResumeContent() {
           <AccordionTrigger>Certifications</AccordionTrigger>
           <AccordionContent className=" p-3 rounded-md mb-3">
             <CertificationSection
-              data={resumeData}
-              setData={setResumeData}
+              resumeData={resumeData}
+              setResumeData={setResumeData}
               openDialog={openDialog}
               setOpenDialog={setOpenDialog}
               setTempData={setTempData}
@@ -136,8 +142,8 @@ export default function ResumeContent() {
           <AccordionTrigger>Hobbies</AccordionTrigger>
           <AccordionContent className=" p-3 rounded-md mb-3">
             <HobbySection
-              data={resumeData}
-              setData={setResumeData}
+              resumeData={resumeData}
+              setResumeData={setResumeData}
               openDialog={openDialog}
               setOpenDialog={setOpenDialog}
               setTempData={setTempData}
@@ -148,7 +154,7 @@ export default function ResumeContent() {
         <AccordionItem key="skills" value="skills" className="dark:bg-gray-500 bg-gray-100 text-black border-none rounded-md px-3 mb-3">
           <AccordionTrigger>Skills</AccordionTrigger>
           <AccordionContent className=" p-3 rounded-md mb-3">
-            <SkillsSection data={resumeData} setData={setResumeData} />
+            <SkillsSection resumeData={resumeData} setResumeData={setResumeData} />
           </AccordionContent>
         </AccordionItem>
       </Accordion>
@@ -171,8 +177,8 @@ export default function ResumeContent() {
                 <Input
                 className=" text-black dark:text-white"
                   type="date"
-                  value={tempData.from || ""}
-                  onChange={(e) => setTempData({ ...tempData, from: e.target.value })}
+                  value={tempData.from_date || ""}
+                  onChange={(e) => setTempData({ ...tempData, from_date: e.target.value })}
                 />
               </div>
               <div className="flex flex-col w-1/2">
@@ -180,8 +186,8 @@ export default function ResumeContent() {
                 <Input
                 className=" text-black dark:text-white"
                   type="date"
-                  value={tempData.to || ""}
-                  onChange={(e) => setTempData({ ...tempData, to: e.target.value })}
+                  value={tempData.to_date || ""}
+                  onChange={(e) => setTempData({ ...tempData, to_date: e.target.value })}
                 />
               </div>
             </div>

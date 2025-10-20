@@ -4,9 +4,8 @@ import { Button } from "@/components/ui/button";
 import { PencilLine, Trash2 } from "lucide-react";
 
 export default function EducationSection({
-  data,
-  setData,
-  openDialog,
+  resumeData,
+  setResumeData,
   setOpenDialog,
   setTempData,
   setEditIndex,
@@ -14,7 +13,7 @@ export default function EducationSection({
 
   return (
     <div className="space-y-3">
-      {data.educations.map((item, idx) => (
+      {resumeData.educations.map((item, idx) => (
         <div
           key={idx}
           className=" p-3 rounded flex justify-between items-center dark:bg-gray-400 bg-gray-200"
@@ -30,9 +29,9 @@ export default function EducationSection({
               className="bg-rose-700 cursor-pointer text-white p-1 rounded"
               size={26}
               onClick={() =>
-                setData({
-                  ...data,
-                  educations: data.educations.filter((_, i) => i !== idx),
+                setResumeData({
+                  ...resumeData,
+                  educations: resumeData.educations.filter((_, i) => i !== idx),
                 })
               }
             />

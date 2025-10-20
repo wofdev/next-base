@@ -12,7 +12,7 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "../ui/badge";
 
-export default function SkillsSection({ data, setData }) {
+export default function SkillsSection({ resumeData, setResumeData }) {
   const [tempSkillParent, setTempSkillParent] = useState("");
   const [tempSkill, setTempSkill] = useState("");
 
@@ -30,10 +30,10 @@ export default function SkillsSection({ data, setData }) {
           className="bg-primary text-white ms-2 rounded-full cursor-pointer"
           onClick={() => {
             const newCategory = tempSkillParent.trim().replace(/\s+/g, " ");
-            if (Object.keys(data.skills).includes(newCategory)) {
+            if (Object.keys(resumeData.skills).includes(newCategory)) {
               alert("This category already exists.");
             } else if (newCategory) {
-              setData((prev) => ({
+              setResumeData((prev) => ({
                 ...prev,
                 skills: {
                   ...prev.skills,
@@ -56,10 +56,10 @@ export default function SkillsSection({ data, setData }) {
           className="bg-primary text-white ms-2 rounded-full cursor-pointer "
           onClick={() => {
             const newCategory = tempSkillParent.trim().replace(/\s+/g, " ");
-            if (Object.keys(data.skills).includes(newCategory)) {
+            if (Object.keys(resumeData.skills).includes(newCategory)) {
               alert("This category already exists.");
             } else if (newCategory) {
-              setData((prev) => ({
+              setResumeData((prev) => ({
                 ...prev,
                 skills: {
                   ...prev.skills,
@@ -76,7 +76,7 @@ export default function SkillsSection({ data, setData }) {
       {/* Skills Accordion */}
       <div className="space-y-3">
         <Accordion type="single" collapsible className="w-full">
-          {Object.keys(data.skills).map((category) => (
+          {Object.keys(resumeData.skills).map((category) => (
             <AccordionItem
               key={category}
               value={category}
@@ -87,7 +87,7 @@ export default function SkillsSection({ data, setData }) {
                 <span
                   className="flex items-center mb-3 cursor-pointer"
                   onClick={() =>
-                    setData((prev) => ({
+                    setResumeData((prev) => ({
                       ...prev,
                       skills: Object.fromEntries(
                         Object.entries(prev.skills).filter(
@@ -113,10 +113,10 @@ export default function SkillsSection({ data, setData }) {
                     className="bg-primary text-white ms-2 rounded-full cursor-pointer"
                     onClick={() => {
                       const newSkill = tempSkill.trim().replace(/\s+/g, " ");
-                      if (data.skills[category].includes(newSkill)) {
+                      if (resumeData.skills[category].includes(newSkill)) {
                         alert("This skill already exists.");
                       } else if (newSkill) {
-                        setData((prev) => ({
+                        setResumeData((prev) => ({
                           ...prev,
                           skills: {
                             ...prev.skills,
@@ -130,7 +130,7 @@ export default function SkillsSection({ data, setData }) {
                 </div>
 
                 {/* Skills chips */}
-                {data.skills[category].map((skill) => (
+                {resumeData.skills[category].map((skill) => (
                   <Badge
                     key={skill}
                     className="shadow-sm me-1 rounded-full px-2 py-1 items-center gap-1"
@@ -139,7 +139,7 @@ export default function SkillsSection({ data, setData }) {
                     <span
                       className="cursor-pointer text-white ms-1"
                       onClick={() =>
-                        setData((prev) => ({
+                        setResumeData((prev) => ({
                           ...prev,
                           skills: {
                             ...prev.skills,
