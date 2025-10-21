@@ -220,51 +220,39 @@ export default function ResumePreview() {
                       {data.contact.website.replace(/^https?:\/\//, "")}
                     </a>
                   )}
-                </div>
 
-                <div className="flex gap-4 mt-4 justify-center">
-                  {data.contact?.github && (
+                                    {data.contact?.github && (
                     <a
                       href={data.contact.github}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label="github"
-                      className="p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="flex items-center gap-3 text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300"
                     >
-                      <Github className="w-5 h-5" />
+                      <Github className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      {data.contact.github.replace(/^https?:\/\//, "")}
                     </a>
                   )}
-                  {data.contact?.linkedIn && (
-                    <a
-                      href={data.contact.linkedIn}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="linkedin"
-                      className="p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                    >
-                      <Linkedin className="w-5 h-5" />
-                    </a>
-                  )}
-                  {data.contact?.twitter && (
-                    <a
-                      href={data.contact.twitter}
-                      target="_blank"
-                      rel="noreferrer"
-                      aria-label="twitter"
-                      className="p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
-                    >
-                      <Twitter className="w-5 h-5" />
-                    </a>
-                  )}
-                  {data.contact?.instagram && (
+                                    {data.contact?.instagram && (
                     <a
                       href={data.contact.instagram}
                       target="_blank"
                       rel="noreferrer"
-                      aria-label="instagram"
-                      className="p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-600 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
+                      className="flex items-center gap-3 text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300"
                     >
-                      <Instagram className="w-5 h-5" />
+                      <Instagram className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      {data.contact.instagram.replace(/^https?:\/\//, "")}
+                    </a>
+                  )}
+
+                                                      {data.contact?.twitter && (
+                    <a
+                      href={data.contact.twitter}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="flex items-center gap-3 text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300"
+                    >
+                      <Twitter className="w-4 h-4 text-blue-600 dark:text-blue-400" />
+                      {data.contact.twitter.replace(/^https?:\/\//, "")}
                     </a>
                   )}
                 </div>
