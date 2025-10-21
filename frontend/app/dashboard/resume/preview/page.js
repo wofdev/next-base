@@ -27,6 +27,7 @@ import {
   Moon,
 } from "lucide-react"
 import { useTheme } from "next-themes"
+import axios from "axios"
 
 export default function ResumePreview() {
   const [isVisible, setIsVisible] = useState(false)
@@ -38,103 +39,15 @@ export default function ResumePreview() {
     setMounted(true)
   }, [])
 
-  const data = {
-    titleData: {
-      about:
-        "I am a passionate full-stack developer with 5+ years of experience in building scalable web applications and RESTful APIs. I thrive on creating innovative solutions that bridge the gap between cutting-edge technology and exceptional user experiences.",
-      profilePhoto: null,
-      title: "Full Stack Developer",
-    },
-    skills: {
-      frontend: ["Next.js", "React", "JavaScript", "TypeScript"],
-      backend: ["Python", "Django", "Node.js", "REST API"],
-      devops: ["Docker", "AWS", "CI/CD", "Kubernetes"],
-    },
-    educations: [
-      {
-        from: "2018-09-01",
-        to: "2022-06-30",
-        title: "B.Sc. in Computer Science - University of California",
-        description:
-          "Graduated with honors, focused on software engineering and web development. Led multiple hackathon teams to victory.",
-      },
-      {
-        from: "2023-01-01",
-        to: "2023-06-30",
-        title: "React Advanced Bootcamp",
-        description: "Completed an intensive React & Next.js course with distinction.",
-      },
-    ],
-    works: [
-      {
-        from: "2022-07-01",
-        to: "2024-09-01",
-        title: "Senior Software Engineer at Google",
-        description:
-          "Developed scalable microservices for Google Cloud Platform. Led a team of 5 engineers and improved system performance by 40%.",
-      },
-      {
-        from: "2020-01-01",
-        to: "2022-06-30",
-        title: "Frontend Developer at StartupX",
-        description:
-          "Built React and Next.js apps with real-time features and WebSocket integration. Increased user engagement by 60%.",
-      },
-    ],
-    projects: [
-      {
-        from: "2023-03-01",
-        to: "2023-08-01",
-        title: "E-commerce Platform",
-        description:
-          "Developed a full-stack e-commerce platform with Next.js, Django and Stripe payments integration. Processed $1M+ in transactions.",
-      },
-      {
-        from: "2024-01-01",
-        to: "2024-03-01",
-        title: "AI Chatbot",
-        description:
-          "Created a chatbot powered by OpenAI GPT API to automate customer support. Reduced response time by 80%.",
-      },
-    ],
-    certifications: [
-      {
-        from: "2021-05-01",
-        to: "2021-05-01",
-        title: "AWS Certified Solutions Architect",
-        description: "Earned AWS certification for designing and deploying scalable systems on AWS.",
-      },
-      {
-        from: "2022-08-15",
-        to: "2022-08-15",
-        title: "Google Cloud Professional",
-        description: "Google Cloud Platform Professional Cloud Architect Certification.",
-      },
-    ],
-    hobbies: [
-      {
-        title: "Photography",
-        description: "I enjoy landscape and street photography on weekends.",
-      },
-      {
-        title: "Traveling",
-        description: "Love exploring new cultures and cities.",
-      },
-      {
-        title: "Open Source",
-        description: "Contributing to open source projects and mentoring developers.",
-      },
-    ],
-    contactdetails: {
-      phone: "+1 234 567 890",
-      email: "john.doe@example.com",
-      website: "https://johndoe.dev",
-      github: "https://github.com/johndoe",
-      linkedIn: "https://linkedin.com/in/johndoe",
-      twitter: "https://twitter.com/johndoe",
-      instagram: "https://instagram.com/johndoe",
-    },
-  }
+  const [data, setData] = useState({});
+  useEffect(()=>{
+    const get_data = async () => {
+      let res = await axios.get("http://localhost:8000/api/resume-data/")
+      setData(res.data)
+      console.log(res.data)
+    }
+    get_data();
+  },[])
 
   // ====== helpers ======
   const fmt = (iso) => {
@@ -153,7 +66,7 @@ export default function ResumePreview() {
       .join(" ")
   }
 
-  const displayName = nameFromEmail(data.contactdetails?.email)
+
 
   // flatten skills for quick badges
   const flatSkills = Object.entries(data.skills || {}).flatMap(([cat, arr]) => (arr || []).map((s) => ({ cat, s })))
@@ -222,11 +135,11 @@ export default function ResumePreview() {
               <div className="flex flex-col items-center text-center gap-6">
                 <div className="relative">
                   <Avatar className="w-32 h-32 ring-4 ring-blue-500/30 dark:ring-blue-400/30 ring-offset-4 ring-offset-white dark:ring-offset-gray-800">
-                    {data.titleData?.profilePhoto ? (
-                      <AvatarImage src={data.titleData.profilePhoto || "/placeholder.svg"} alt={displayName} />
+                    {data.title?.profilePhoto ? (
+                      <AvatarImage src={data.title.profilePhoto || "/placeholder.svg"} alt={data?.title?.display_name} />
                     ) : (
                       <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-white">
-                        {displayName
+                        {data?.title?.display_name
                           .split(" ")
                           .map((p) => p[0])
                           .slice(0, 2)
@@ -240,12 +153,12 @@ export default function ResumePreview() {
                 </div>
 
                 <div>
-                  <h2 className="text-2xl font-bold text-balance mb-2 text-gray-900 dark:text-white">{displayName}</h2>
-                  <p className="text-blue-600 dark:text-blue-400 font-medium text-lg">{data.titleData?.title}</p>
-                  <div className="flex items-center justify-center gap-2 mt-2 text-sm text-gray-600 dark:text-gray-400">
+                  <h2 className="text-2xl font-bold text-balance mb-2 text-gray-900 dark:text-white">{data?.title?.display_name}</h2>
+                  <p className="text-blue-600 dark:text-blue-400 font-medium text-lg">{data.title?.title}</p>
+                  {/* <div className="flex items-center justify-center gap-2 mt-2 text-sm text-gray-600 dark:text-gray-400">
                     <Zap className="w-4 h-4 text-purple-600 dark:text-purple-400" />
                     Available for hire
-                  </div>
+                  </div> */}
                 </div>
 
                 <Separator className="my-4 w-full bg-gray-200 dark:bg-gray-700" />
@@ -278,41 +191,41 @@ export default function ResumePreview() {
                 <Separator className="my-4 w-full bg-gray-200 dark:bg-gray-700" />
 
                 <div className="flex flex-col w-full gap-3">
-                  {data.contactdetails?.phone && (
+                  {data.contact?.phone && (
                     <a
-                      href={`tel:${data.contactdetails.phone}`}
+                      href={`tel:${data.contact.phone}`}
                       className="flex items-center gap-3 text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300"
                     >
                       <Phone className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                      {data.contactdetails.phone}
+                      {data.contact.phone}
                     </a>
                   )}
-                  {data.contactdetails?.email && (
+                  {data.contact?.email && (
                     <a
-                      href={`mailto:${data.contactdetails.email}`}
+                      href={`mailto:${data.contact.email}`}
                       className="flex items-center gap-3 text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300"
                     >
                       <Mail className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                      {data.contactdetails.email}
+                      {data.contact.email}
                     </a>
                   )}
-                  {data.contactdetails?.website && (
+                  {data.contact?.website && (
                     <a
-                      href={data.contactdetails.website}
+                      href={data.contact.website}
                       target="_blank"
                       rel="noreferrer"
                       className="flex items-center gap-3 text-sm hover:text-blue-600 dark:hover:text-blue-400 transition-colors p-2 rounded-lg hover:bg-blue-50 dark:hover:bg-blue-900/20 text-gray-700 dark:text-gray-300"
                     >
                       <Globe className="w-4 h-4 text-blue-600 dark:text-blue-400" />
-                      {data.contactdetails.website.replace(/^https?:\/\//, "")}
+                      {data.contact.website.replace(/^https?:\/\//, "")}
                     </a>
                   )}
                 </div>
 
                 <div className="flex gap-4 mt-4 justify-center">
-                  {data.contactdetails?.github && (
+                  {data.contact?.github && (
                     <a
-                      href={data.contactdetails.github}
+                      href={data.contact.github}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="github"
@@ -321,9 +234,9 @@ export default function ResumePreview() {
                       <Github className="w-5 h-5" />
                     </a>
                   )}
-                  {data.contactdetails?.linkedIn && (
+                  {data.contact?.linkedIn && (
                     <a
-                      href={data.contactdetails.linkedIn}
+                      href={data.contact.linkedIn}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="linkedin"
@@ -332,9 +245,9 @@ export default function ResumePreview() {
                       <Linkedin className="w-5 h-5" />
                     </a>
                   )}
-                  {data.contactdetails?.twitter && (
+                  {data.contact?.twitter && (
                     <a
-                      href={data.contactdetails.twitter}
+                      href={data.contact.twitter}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="twitter"
@@ -343,9 +256,9 @@ export default function ResumePreview() {
                       <Twitter className="w-5 h-5" />
                     </a>
                   )}
-                  {data.contactdetails?.instagram && (
+                  {data.contact?.instagram && (
                     <a
-                      href={data.contactdetails.instagram}
+                      href={data.contact.instagram}
                       target="_blank"
                       rel="noreferrer"
                       aria-label="instagram"
@@ -374,7 +287,7 @@ export default function ResumePreview() {
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="leading-relaxed text-pretty text-gray-700 dark:text-gray-300">{data.titleData?.about}</p>
+                <p className="leading-relaxed text-pretty text-gray-700 dark:text-gray-300">{data.title?.about}</p>
               </CardContent>
             </Card>
 
@@ -407,7 +320,7 @@ export default function ResumePreview() {
                             variant="outline"
                             className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700"
                           >
-                            {fmt(w.from)} - {fmt(w.to)}
+                            {fmt(w.from_date)} - {fmt(w.to_date)}
                           </Badge>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{w.description}</p>
@@ -447,7 +360,7 @@ export default function ResumePreview() {
                             variant="outline"
                             className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700"
                           >
-                            {fmt(ed.from)} - {fmt(ed.to)}
+                            {fmt(ed.from_date)} - {fmt(ed.to_date)}
                           </Badge>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{ed.description}</p>
@@ -492,7 +405,7 @@ export default function ResumePreview() {
                             variant="outline"
                             className="text-xs mb-3 bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700"
                           >
-                            {fmt(p.from)} - {fmt(p.to)}
+                            {fmt(p.from_date)} - {fmt(p.to_date)}
                           </Badge>
                           <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{p.description}</p>
                         </CardContent>
@@ -532,8 +445,8 @@ export default function ResumePreview() {
                             variant="outline"
                             className="text-xs bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 border-purple-200 dark:border-purple-700"
                           >
-                            {fmt(c.from)}
-                            {c.to ? ` - ${fmt(c.to)}` : ""}
+                            {fmt(c.from_date)}
+                            {c.to_date ? ` - ${fmt(c.to_date)}` : ""}
                           </Badge>
                         </div>
                         <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{c.description}</p>
@@ -619,7 +532,7 @@ export default function ResumePreview() {
 //   }, [])
 
 //   const data = {
-//     titleData: {
+//     title: {
 //       about:
 //         "I am a passionate full-stack developer with 5+ years of experience in building scalable web applications and RESTful APIs. I thrive on creating innovative solutions that bridge the gap between cutting-edge technology and exceptional user experiences.",
 //       profilePhoto: null,
@@ -705,7 +618,7 @@ export default function ResumePreview() {
 //         description: "Contributing to open source projects and mentoring developers.",
 //       },
 //     ],
-//     contactdetails: {
+//     contact: {
 //       phone: "+1 234 567 890",
 //       email: "john.doe@example.com",
 //       website: "https://johndoe.dev",
@@ -721,7 +634,7 @@ export default function ResumePreview() {
 //     if (!iso) return ""
 //     const d = new Date(iso)
 //     if (Number.isNaN(d.getTime())) return iso
-//     return d.toLocaleString(undefined, { month: "short", year: "numeric" })
+//     return d.to_dateLocaleString(undefined, { month: "short", year: "numeric" })
 //   }
 
 //   const nameFromEmail = (email) => {
@@ -729,11 +642,11 @@ export default function ResumePreview() {
 //     const local = email.split("@")[0]
 //     return local
 //       .split(/[.\-_]/)
-//       .map((s) => s.charAt(0).toUpperCase() + s.slice(1))
+//       .map((s) => s.charAt(0).to_dateUpperCase() + s.slice(1))
 //       .join(" ")
 //   }
 
-//   const displayName = nameFromEmail(data.contactdetails?.email)
+//   const display_name = nameFromEmail(data.contactdetails?.email)
 
 //   // flatten skills for quick badges
 //   const flatSkills = Object.entries(data.skills || {}).flatMap(([cat, arr]) => (arr || []).map((s) => ({ cat, s })))
@@ -779,11 +692,11 @@ export default function ResumePreview() {
 //               <div className="flex flex-col items-center text-center gap-6">
 //                 <div className="relative">
 //                   <Avatar className="w-32 h-32 ring-4 ring-primary/30 ring-offset-4 ring-offset-background">
-//                     {data.titleData?.profilePhoto ? (
-//                       <AvatarImage src={data.titleData.profilePhoto || "/placeholder.svg"} alt={displayName} />
+//                     {data.title?.profilePhoto ? (
+//                       <AvatarImage src={data.title.profilePhoto || "/placeholder.svg"} alt={display_name} />
 //                     ) : (
 //                       <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-primary to-accent text-primary-foreground">
-//                         {displayName
+//                         {display_name
 //                           .split(" ")
 //                           .map((p) => p[0])
 //                           .slice(0, 2)
@@ -797,8 +710,8 @@ export default function ResumePreview() {
 //                 </div>
 
 //                 <div>
-//                   <h2 className="text-2xl font-bold text-balance mb-2">{displayName}</h2>
-//                   <p className="text-primary font-medium text-lg">{data.titleData?.title}</p>
+//                   <h2 className="text-2xl font-bold text-balance mb-2">{display_name}</h2>
+//                   <p className="text-primary font-medium text-lg">{data.title?.title}</p>
 //                   <div className="flex items-center justify-center gap-2 mt-2 text-sm text-muted-foreground">
 //                     <Zap className="w-4 h-4 text-accent" />
 //                     Available for hire
@@ -929,7 +842,7 @@ export default function ResumePreview() {
 //                 </CardTitle>
 //               </CardHeader>
 //               <CardContent>
-//                 <p className="leading-relaxed text-pretty text-foreground/90">{data.titleData?.about}</p>
+//                 <p className="leading-relaxed text-pretty text-foreground/90">{data.title?.about}</p>
 //               </CardContent>
 //             </Card>
 
@@ -957,7 +870,7 @@ export default function ResumePreview() {
 //                         <div className="flex justify-between items-start mb-3">
 //                           <h3 className="font-semibold text-lg text-balance">{w.title}</h3>
 //                           <Badge variant="outline" className="text-xs bg-primary/10 text-primary border-primary/20">
-//                             {fmt(w.from)} - {fmt(w.to)}
+//                             {fmt(w.from_date)} - {fmt(w.to_date)}
 //                           </Badge>
 //                         </div>
 //                         <p className="text-sm text-muted-foreground leading-relaxed">{w.description}</p>
@@ -994,7 +907,7 @@ export default function ResumePreview() {
 //                         <div className="flex justify-between items-start mb-3">
 //                           <h3 className="font-semibold text-balance">{ed.title}</h3>
 //                           <Badge variant="outline" className="text-xs bg-primary/10 text-primary border-primary/20">
-//                             {fmt(ed.from)} - {fmt(ed.to)}
+//                             {fmt(ed.from_date)} - {fmt(ed.to_date)}
 //                           </Badge>
 //                         </div>
 //                         <p className="text-sm text-muted-foreground leading-relaxed">{ed.description}</p>
@@ -1039,7 +952,7 @@ export default function ResumePreview() {
 //                             variant="outline"
 //                             className="text-xs mb-3 bg-primary/10 text-primary border-primary/20"
 //                           >
-//                             {fmt(p.from)} - {fmt(p.to)}
+//                             {fmt(p.from_date)} - {fmt(p.to_date)}
 //                           </Badge>
 //                           <p className="text-sm text-muted-foreground leading-relaxed">{p.description}</p>
 //                         </CardContent>
@@ -1076,8 +989,8 @@ export default function ResumePreview() {
 //                         <div className="flex justify-between items-start mb-3">
 //                           <div className="font-semibold text-balance">{c.title}</div>
 //                           <Badge variant="outline" className="text-xs bg-accent/10 text-accent border-accent/20">
-//                             {fmt(c.from)}
-//                             {c.to ? ` - ${fmt(c.to)}` : ""}
+//                             {fmt(c.from_date)}
+//                             {c.to_date ? ` - ${fmt(c.to_date)}` : ""}
 //                           </Badge>
 //                         </div>
 //                         <p className="text-sm text-muted-foreground leading-relaxed">{c.description}</p>

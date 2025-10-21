@@ -43,17 +43,17 @@ export default function ResumeContent() {
   },[])
 
   const handleDialogConfirm = () => {
-    setTempData({...tempData,user:1})
+    setTempData({...tempData,user:resumeData?.title?.user})
     if (openDialog && tempData) {
       if (editIndex !== null) {
         const updatedSection = [...resumeData[openDialog]];
-        updatedSection[editIndex] = {...tempData,user:1};
+        updatedSection[editIndex] = {...tempData,user:resumeData?.title?.user};
         setResumeData({ ...resumeData, [openDialog]: updatedSection });
         setEditIndex(null);
       } else {
         setResumeData({
           ...resumeData,
-          [openDialog]: [...resumeData[openDialog], {...tempData,user:1}],
+          [openDialog]: [...resumeData[openDialog], {...tempData,user:resumeData?.title?.user}],
         });
       }
     }
