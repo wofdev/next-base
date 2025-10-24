@@ -9,8 +9,8 @@ export default function EducationSection({
   setOpenDialog,
   setTempData,
   setEditIndex,
+  setIsUserChanged
 }) {
-
   return (
     <div className="space-y-3">
       {resumeData.educations.map((item, idx) => (
@@ -28,12 +28,17 @@ export default function EducationSection({
             <Trash2
               className="bg-rose-700 cursor-pointer text-white p-1 rounded"
               size={26}
-              onClick={() =>
-                setResumeData({
-                  ...resumeData,
-                  educations: resumeData.educations.filter((_, i) => i !== idx),
-                })
-              }
+              onClick={() => {
+                if (confirm("are you sure to delete?")) {
+                  setIsUserChanged(true)
+                  setResumeData({
+                    ...resumeData,
+                    educations: resumeData.educations.filter(
+                      (_, i) => i !== idx
+                    ),
+                  });
+                }
+              }}
             />
             <PencilLine
               onClick={() => {
@@ -48,9 +53,7 @@ export default function EducationSection({
         </div>
       ))}
 
-      <Button onClick={() => setOpenDialog("educations")}>
-        + Add
-      </Button>
+      <Button onClick={() => setOpenDialog("educations")}>+ Add</Button>
     </div>
   );
 }

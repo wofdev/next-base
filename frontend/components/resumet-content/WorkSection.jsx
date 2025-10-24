@@ -10,6 +10,7 @@ export default function WorkSection({
   setOpenDialog,
   setTempData,
   setEditIndex,
+  setIsUserChanged
 }) {
   return (
     <div className="space-y-3">
@@ -28,12 +29,15 @@ export default function WorkSection({
             <Trash2
               className="bg-rose-700 cursor-pointer text-white p-1 rounded"
               size={26}
-              onClick={() =>
-                setResumeData({
-                  ...resumeData,
-                  works: resumeData.works.filter((_, i) => i !== idx),
-                })
-              }
+              onClick={() => {
+                if (confirm("are you sure to delete?")) {
+                  setIsUserChanged(true)
+                  setResumeData({
+                    ...resumeData,
+                    works: resumeData.works.filter((_, i) => i !== idx),
+                  });
+                }
+              }}
             />
             <PencilLine
               onClick={() => {
@@ -48,9 +52,7 @@ export default function WorkSection({
         </div>
       ))}
 
-      <Button  onClick={() => setOpenDialog("works")}>
-        + Add
-      </Button>
+      <Button onClick={() => setOpenDialog("works")}>+ Add</Button>
     </div>
   );
 }

@@ -10,6 +10,7 @@ export default function ProjectSection({
   setOpenDialog,
   setTempData,
   setEditIndex,
+  setIsUserChanged
 }) {
   return (
     <div className="space-y-3">
@@ -28,12 +29,15 @@ export default function ProjectSection({
             <Trash2
               className="bg-rose-700 cursor-pointer text-white p-1 rounded"
               size={26}
-              onClick={() =>
-                setResumeData({
-                  ...resumeData,
-                  projects: resumeData.projects.filter((_, i) => i !== idx),
-                })
-              }
+              onClick={() => {
+                if (confirm("are you sure to delete?")) {
+                  setIsUserChanged(true)
+                  setResumeData({
+                    ...resumeData,
+                    projects: resumeData.projects.filter((_, i) => i !== idx),
+                  });
+                }
+              }}
             />
             <PencilLine
               onClick={() => {
@@ -48,9 +52,7 @@ export default function ProjectSection({
         </div>
       ))}
 
-      <Button onClick={() => setOpenDialog("projects")}>
-        + Add
-      </Button>
+      <Button onClick={() => setOpenDialog("projects")}>+ Add</Button>
     </div>
   );
 }

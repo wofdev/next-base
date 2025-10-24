@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Plus } from "lucide-react";
+import { Plus, Trash2 } from "lucide-react";
 import {
   Accordion,
   AccordionContent,
@@ -12,39 +12,12 @@ import {
 } from "@/components/ui/accordion";
 import { Badge } from "../ui/badge";
 
-export default function SkillsSection({ resumeData, setResumeData }) {
+export default function SkillsSection({ resumeData, setResumeData,setIsUserChanged }) {
   const [tempSkillParent, setTempSkillParent] = useState("");
   const [tempSkill, setTempSkill] = useState("");
 
   return (
     <div className="bg-white dark:bg-black p-3 rounded-md mb-3">
-      {/* Add New Skill Category */}
-      {/* <div className="flex mb-4 items-center">
-        <Input
-          className="w-42  dark:bg-gray-300 bg-gray-200 mb-4"
-          value={tempSkillParent}
-          onChange={(e) => setTempSkillParent(e.target.value)}
-          placeholder="New Skill Category"
-        />
-        <Plus
-          className="bg-primary text-white ms-2 rounded-full cursor-pointer"
-          onClick={() => {
-            const newCategory = tempSkillParent.trim().replace(/\s+/g, " ");
-            if (Object.keys(resumeData.skills).includes(newCategory)) {
-              alert("This category already exists.");
-            } else if (newCategory) {
-              setResumeData((prev) => ({
-                ...prev,
-                skills: {
-                  ...prev.skills,
-                  [newCategory]: [],
-                },
-              }));
-              setTempSkillParent("");
-            }
-          }}
-        />
-      </div> */}
       <div className="flex items-center mb-4">
         <Input
           className="w-42 dark:bg-gray-300 bg-gray-200"
@@ -59,6 +32,7 @@ export default function SkillsSection({ resumeData, setResumeData }) {
             if (Object.keys(resumeData.skills).includes(newCategory)) {
               alert("This category already exists.");
             } else if (newCategory) {
+              setIsUserChanged(true)
               setResumeData((prev) => ({
                 ...prev,
                 skills: {
@@ -71,7 +45,6 @@ export default function SkillsSection({ resumeData, setResumeData }) {
           }}
         />
       </div>
-
 
       {/* Skills Accordion */}
       <div className="space-y-3">
@@ -86,19 +59,25 @@ export default function SkillsSection({ resumeData, setResumeData }) {
               <AccordionContent className="bg-gray-300 p-3 rounded-md mb-3">
                 <span
                   className="flex items-center mb-3 cursor-pointer"
-                  onClick={() =>
-                    setResumeData((prev) => ({
-                      ...prev,
-                      skills: Object.fromEntries(
-                        Object.entries(prev.skills).filter(
-                          ([key]) => key !== category
-                        )
-                      ),
-                    }))
-                  }
+                  onClick={() => {
+                    if (confirm(`delete whole ${category} category!?`)) {
+                      setIsUserChanged(true)
+                      setResumeData((prev) => ({
+                        ...prev,
+                        skills: Object.fromEntries(
+                          Object.entries(prev.skills).filter(
+                            ([key]) => key !== category
+                          )
+                        ),
+                      }));
+                    }
+                  }}
                 >
-                  Remove whole <span className="font-bold mx-1">{category}</span>{" "}
-                  category
+                  <div className="bg-rose-700 cursor-pointer text-white p-1 rounded flex items-center">
+                                      <Trash2 size={16} className="me-2" />  Remove
+                  <span className="font-bold mx-1">{category}</span> category
+                  </div>
+
                 </span>
 
                 {/* Add skill to category */}
@@ -116,6 +95,7 @@ export default function SkillsSection({ resumeData, setResumeData }) {
                       if (resumeData.skills[category].includes(newSkill)) {
                         alert("This skill already exists.");
                       } else if (newSkill) {
+                        setIsUserChanged(true)
                         setResumeData((prev) => ({
                           ...prev,
                           skills: {
@@ -138,7 +118,8 @@ export default function SkillsSection({ resumeData, setResumeData }) {
                     {skill}
                     <span
                       className="cursor-pointer text-white ms-1"
-                      onClick={() =>
+                      onClick={() =>{
+                        setIsUserChanged(true)
                         setResumeData((prev) => ({
                           ...prev,
                           skills: {
@@ -148,7 +129,7 @@ export default function SkillsSection({ resumeData, setResumeData }) {
                             ),
                           },
                         }))
-                      }
+                      }}
                     >
                       x
                     </span>
