@@ -32,7 +32,12 @@ export default function ResumeContent() {
   const [resumeData, setResumeData] = useState({});
   const [editIndex, setEditIndex] = useState(null);
   const [openDialog, setOpenDialog] = useState(null);
-  const [tempData, setTempData] = useState({});
+  const [tempData, setTempData] = useState({
+    title: "",
+    from_date: "",
+    to_date: "",
+    description: "",
+  });
   const [titleData, setTitleData] = useState({});
   const [contactData, setContactData] = useState({});
   const isFirstRender = useRef(true);
@@ -63,29 +68,93 @@ export default function ResumeContent() {
     setLoading(false);
   };
 
-  const handleDialogConfirm = () => {
+  // const handleDialogConfirm = async () => {
+  //   if (openDialog === "hobbies") {
+  //     if (tempData.title === "" || tempData.description === "") {
+  //       alert("Empty field is not allowed...");
+  //       return;
+  //     }
+  //   } else {
+  //     if (
+  //       tempData.title === "" ||
+  //       tempData.to_date === "" ||
+  //       tempData.from_date === "" ||
+  //       tempData.description === ""
+  //     ) {
+  //       alert("Empty field is not allowed...");
+  //       return;
+  //     }
+  //   }
+
+  //   setIsUserChanged(true);
+  //   setTempData({ ...tempData, user: resumeData?.title?.user });
+
+  //   if (openDialog && tempData) {
+  //     if (editIndex !== null) {
+  //       const updatedSection = [...resumeData[openDialog]];
+  //       updatedSection[editIndex] = {
+  //         ...tempData,
+  //         user: resumeData?.title?.user,
+  //       };
+  //       setResumeData({ ...resumeData, [openDialog]: updatedSection });
+  //       setEditIndex(null);
+  //     } else {
+  //       setResumeData({
+  //         ...resumeData,
+  //         [openDialog]: [
+  //           ...(resumeData[openDialog] || []),
+  //           { ...tempData, user: resumeData?.title?.user },
+  //         ],
+  //       });
+  //     }
+  //   }
+
+  //   setTempData({});
+  //   setOpenDialog(null);
+  // };
+
+  const handleDialogConfirm = async () => {
+    // داده‌ها را تمیز می‌کنیم
+    const {
+      title = "",
+      from_date = "",
+      to_date = "",
+      description = "",
+    } = tempData;
+
+    // بررسی فیلدهای خالی
+    if (openDialog === "hobbies") {
+      if (!title.trim() || !description.trim()) {
+        alert("Empty field is not allowed...");
+        return;
+      }
+    } else {
+      if (!title.trim() || !from_date || !to_date || !description.trim()) {
+        alert("Empty field is not allowed...");
+        return;
+      }
+    }
+
+    const updatedTemp = { ...tempData, user: resumeData?.title?.user };
+
     setIsUserChanged(true);
-    setTempData({ ...tempData, user: resumeData?.title?.user });
-    if (openDialog && tempData) {
+
+    if (openDialog && updatedTemp) {
+      const sectionData = resumeData[openDialog] || [];
       if (editIndex !== null) {
-        const updatedSection = [...resumeData[openDialog]];
-        updatedSection[editIndex] = {
-          ...tempData,
-          user: resumeData?.title?.user,
-        };
+        const updatedSection = [...sectionData];
+        updatedSection[editIndex] = updatedTemp;
         setResumeData({ ...resumeData, [openDialog]: updatedSection });
         setEditIndex(null);
       } else {
         setResumeData({
           ...resumeData,
-          [openDialog]: [
-            ...resumeData[openDialog],
-            { ...tempData, user: resumeData?.title?.user },
-          ],
+          [openDialog]: [...sectionData, updatedTemp],
         });
       }
     }
-    setTempData({});
+
+    setTempData({ title: "", from_date: "", to_date: "", description: "" });
     setOpenDialog(null);
   };
 

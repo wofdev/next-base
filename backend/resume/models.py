@@ -10,11 +10,11 @@ class Title(models.Model):
 class Contact(models.Model):
     phone = models.CharField(max_length=11)
     email = models.CharField(max_length=255)
-    website = models.CharField(max_length=255)
-    github = models.CharField(max_length=255)
-    linkedin = models.CharField(max_length=255)
-    twitter = models.CharField(max_length=255)
-    instagram = models.CharField(max_length=255)
+    website = models.CharField(max_length=255,blank=True)
+    github = models.CharField(max_length=255,blank=True)
+    linkedin = models.CharField(max_length=255,blank=True)
+    twitter = models.CharField(max_length=255,blank=True)
+    instagram = models.CharField(max_length=255,blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.phone
