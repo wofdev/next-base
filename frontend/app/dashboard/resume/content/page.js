@@ -68,53 +68,7 @@ export default function ResumeContent() {
     setLoading(false);
   };
 
-  // const handleDialogConfirm = async () => {
-  //   if (openDialog === "hobbies") {
-  //     if (tempData.title === "" || tempData.description === "") {
-  //       alert("Empty field is not allowed...");
-  //       return;
-  //     }
-  //   } else {
-  //     if (
-  //       tempData.title === "" ||
-  //       tempData.to_date === "" ||
-  //       tempData.from_date === "" ||
-  //       tempData.description === ""
-  //     ) {
-  //       alert("Empty field is not allowed...");
-  //       return;
-  //     }
-  //   }
-
-  //   setIsUserChanged(true);
-  //   setTempData({ ...tempData, user: resumeData?.title?.user });
-
-  //   if (openDialog && tempData) {
-  //     if (editIndex !== null) {
-  //       const updatedSection = [...resumeData[openDialog]];
-  //       updatedSection[editIndex] = {
-  //         ...tempData,
-  //         user: resumeData?.title?.user,
-  //       };
-  //       setResumeData({ ...resumeData, [openDialog]: updatedSection });
-  //       setEditIndex(null);
-  //     } else {
-  //       setResumeData({
-  //         ...resumeData,
-  //         [openDialog]: [
-  //           ...(resumeData[openDialog] || []),
-  //           { ...tempData, user: resumeData?.title?.user },
-  //         ],
-  //       });
-  //     }
-  //   }
-
-  //   setTempData({});
-  //   setOpenDialog(null);
-  // };
-
   const handleDialogConfirm = async () => {
-    // داده‌ها را تمیز می‌کنیم
     const {
       title = "",
       from_date = "",
@@ -122,7 +76,6 @@ export default function ResumeContent() {
       description = "",
     } = tempData;
 
-    // بررسی فیلدهای خالی
     if (openDialog === "hobbies") {
       if (!title.trim() || !description.trim()) {
         alert("Empty field is not allowed...");

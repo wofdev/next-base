@@ -23,23 +23,3 @@ export function ThemeToggle() {
     </span>
   )
 }
-
-
-// "use client"
-
-// import React from "react"
-// import { useTheme } from "next-themes"
-// import { Button } from "@/components/ui/button" // از shadcn
-
-// export function ThemeToggle() {
-//   const { theme, setTheme } = useTheme()
-
-//   return (
-//     <Button
-//       variant="outline"
-//       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-//     >
-//       {theme === "dark" ? "☀️" : "🌙"}
-//     </Button>
-//   )
-// }
