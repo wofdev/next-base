@@ -27,6 +27,7 @@ import CertificationSection from "@/components/resumet-content/CertificationSect
 import HobbySection from "@/components/resumet-content/HobbySection";
 import SkillsSection from "@/components/resumet-content/SkillSection";
 import { Loader2Icon } from "lucide-react";
+import { toast } from "sonner";
 
 export default function ResumeContent() {
   const [resumeData, setResumeData] = useState({});
@@ -47,7 +48,6 @@ export default function ResumeContent() {
   useEffect(() => {
     get_data();
   }, []);
-
   useEffect(() => {
     if (isFirstRender.current) {
       isFirstRender.current = false;
@@ -78,12 +78,18 @@ export default function ResumeContent() {
 
     if (openDialog === "hobbies") {
       if (!title.trim() || !description.trim()) {
-        alert("Empty field is not allowed...");
+        toast("Empty field is not allowed...", {
+          unstyled: true,
+          className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+        });
         return;
       }
     } else {
       if (!title.trim() || !from_date || !to_date || !description.trim()) {
-        alert("Empty field is not allowed...");
+        toast("Empty field is not allowed...", {
+          unstyled: true,
+          className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+        });
         return;
       }
     }
@@ -119,15 +125,25 @@ export default function ResumeContent() {
       );
 
       if (res.status === 200 || res.status === 201) {
-        alert("✅ Data saved successfully!");
+        toast("✅ Data saved successfully!", {
+          unstyled: true,
+          className: "bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg",
+        });
       } else {
-        alert(
-          `⚠️ Something went wrong. Server responded with status: ${res.status}`
+        toast(
+          `⚠️ Something went wrong. Server responded with status: ${res.status}`,
+          {
+            unstyled: true,
+            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+          }
         );
       }
     } catch (error) {
       console.error("Error saving data:", error);
-      alert("❌ Failed to save data. Please check your data or try again.");
+      toast("❌ Failed to save data. Please check your data or try again.", {
+        unstyled: true,
+        className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+      });
     }
   };
 

@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
+import { toast } from "sonner";
 
 export default function AboutSection({
   resumeData,
@@ -13,7 +14,11 @@ export default function AboutSection({
 }) {
   const handleClick = () => {
     if (titleData.about == "" || titleData.display_name == "" || titleData.title == "") {
-      alert("invalid input...");
+      toast("invalid input...",
+          {
+            unstyled: true,
+            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+          });
     } else {
       setIsUserChanged(true);
       setResumeData((p) => ({ ...p, title: titleData }));

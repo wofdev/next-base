@@ -11,8 +11,13 @@ import {
   AccordionTrigger,
 } from "@/components/ui/accordion";
 import { Badge } from "../ui/badge";
+import { toast } from "sonner";
 
-export default function SkillsSection({ resumeData, setResumeData,setIsUserChanged }) {
+export default function SkillsSection({
+  resumeData,
+  setResumeData,
+  setIsUserChanged,
+}) {
   const [tempSkillParent, setTempSkillParent] = useState("");
   const [tempSkill, setTempSkill] = useState("");
 
@@ -30,9 +35,13 @@ export default function SkillsSection({ resumeData, setResumeData,setIsUserChang
           onClick={() => {
             const newCategory = tempSkillParent.trim().replace(/\s+/g, " ");
             if (Object.keys(resumeData.skills).includes(newCategory)) {
-              alert("This category already exists.");
+              toast("This category already exists.", {
+                unstyled: true,
+                className:
+                  "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+              });
             } else if (newCategory) {
-              setIsUserChanged(true)
+              setIsUserChanged(true);
               setResumeData((prev) => ({
                 ...prev,
                 skills: {
@@ -61,7 +70,7 @@ export default function SkillsSection({ resumeData, setResumeData,setIsUserChang
                   className="flex items-center mb-3 cursor-pointer"
                   onClick={() => {
                     if (confirm(`delete whole ${category} category!?`)) {
-                      setIsUserChanged(true)
+                      setIsUserChanged(true);
                       setResumeData((prev) => ({
                         ...prev,
                         skills: Object.fromEntries(
@@ -74,10 +83,9 @@ export default function SkillsSection({ resumeData, setResumeData,setIsUserChang
                   }}
                 >
                   <div className="bg-rose-700 cursor-pointer text-white p-1 rounded flex items-center">
-                                      <Trash2 size={16} className="me-2" />  Remove
-                  <span className="font-bold mx-1">{category}</span> category
+                    <Trash2 size={16} className="me-2" /> Remove
+                    <span className="font-bold mx-1">{category}</span> category
                   </div>
-
                 </span>
 
                 {/* Add skill to category */}
@@ -93,9 +101,13 @@ export default function SkillsSection({ resumeData, setResumeData,setIsUserChang
                     onClick={() => {
                       const newSkill = tempSkill.trim().replace(/\s+/g, " ");
                       if (resumeData.skills[category].includes(newSkill)) {
-                        alert("This skill already exists.");
+                        toast("This category already exists.", {
+                          unstyled: true,
+                          className:
+                            "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+                        });
                       } else if (newSkill) {
-                        setIsUserChanged(true)
+                        setIsUserChanged(true);
                         setResumeData((prev) => ({
                           ...prev,
                           skills: {
@@ -118,8 +130,8 @@ export default function SkillsSection({ resumeData, setResumeData,setIsUserChang
                     {skill}
                     <span
                       className="cursor-pointer text-white ms-1"
-                      onClick={() =>{
-                        setIsUserChanged(true)
+                      onClick={() => {
+                        setIsUserChanged(true);
                         setResumeData((prev) => ({
                           ...prev,
                           skills: {
@@ -128,7 +140,7 @@ export default function SkillsSection({ resumeData, setResumeData,setIsUserChang
                               (s) => s !== skill
                             ),
                           },
-                        }))
+                        }));
                       }}
                     >
                       x

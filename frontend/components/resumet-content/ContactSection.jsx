@@ -3,6 +3,7 @@ import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { Button } from "@/components/ui/button";
+import { toast } from "sonner";
 
 export default function ContactSection({
   resumeData,
@@ -13,22 +14,38 @@ export default function ContactSection({
 }) {
   const handleClick = () => {
     if (contactData.phone === "") {
-      alert("Empty phone is not allowed");
+      toast("Empty phone is not allowed",
+          {
+            unstyled: true,
+            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+          });
       return;
     }
 
     if (contactData.email === "") {
-      alert("Empty email is not allowed");
+      toast("Empty email is not allowed",
+          {
+            unstyled: true,
+            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+          });
       return;
     }
 
     if (!/^[+]?\d+$/.test(contactData.phone)) {
-      alert("Invalid phone");
+      toast("Invalid phone",
+          {
+            unstyled: true,
+            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+          });
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactData.email)) {
-      alert("Invalid email");
+      toast("Invalid email",
+          {
+            unstyled: true,
+            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+          });
       return;
     }
 

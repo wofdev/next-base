@@ -2,6 +2,8 @@
 import "./globals.css"
 import { SessionProvider } from "next-auth/react"
 import { ThemeProvider } from "@/components/theme-provider"
+import { Toaster } from "@/components/ui/sonner"
+
 
 export default function RootLayout({ children }) {
   return (
@@ -15,6 +17,7 @@ export default function RootLayout({ children }) {
             disableTransitionOnChange
           >
             {children}
+            <Toaster/>
           </ThemeProvider>
         </SessionProvider>
       </body>
