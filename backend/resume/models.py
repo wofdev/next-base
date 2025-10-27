@@ -5,6 +5,7 @@ class Title(models.Model):
     title = models.CharField(max_length=255)
     display_name = models.CharField(max_length=255, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
+    profile_photo = models.ImageField(upload_to='profile_photos')
     def __str__(self):
         return self.display_name or self.title
 class Contact(models.Model):

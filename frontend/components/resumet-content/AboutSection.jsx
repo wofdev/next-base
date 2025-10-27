@@ -13,12 +13,15 @@ export default function AboutSection({
   setIsUserChanged,
 }) {
   const handleClick = () => {
-    if (titleData.about == "" || titleData.display_name == "" || titleData.title == "") {
-      toast("invalid input...",
-          {
-            unstyled: true,
-            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
-          });
+    if (
+      titleData.about == "" ||
+      titleData.display_name == "" ||
+      titleData.title == ""
+    ) {
+      toast("invalid input...", {
+        unstyled: true,
+        className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+      });
     } else {
       setIsUserChanged(true);
       setResumeData((p) => ({ ...p, title: titleData }));
@@ -71,8 +74,8 @@ export default function AboutSection({
           className="w-full dark:bg-gray-400 bg-gray-50"
         />
       </div>
-
-      {/* <div>
+{/* 
+      <div>
         <Label className="mb-2">Profile Photo</Label>
         <Input
           type="file"
@@ -80,22 +83,46 @@ export default function AboutSection({
           onChange={(e) =>
             setTitleData({
               ...titleData,
-              title: {
-                ...titleData,
-                profilePhoto: e.target.files?.[0] || null,
-              },
+              profile_photo: e.target.files?.[0] || null,
             })
           }
-          className="w-full dark:bg-gray-400 bg-gray-50"
         />
-        {titleData?.profilePhoto && (
-          <img
-            src={URL.createObjectURL(titleData.profilePhoto)}
-            alt="Profile"
-            className="mt-2 w-24 h-24 object-cover rounded-full border"
-          />
-        )}
+        <img
+          src={"http://localhost:8000" + titleData.profile_photo}
+          alt="Profile"
+          className="mt-2 w-24 h-24 object-cover rounded-full border"
+        />
       </div> */}
+
+      <div>
+  <Label className="mb-2">Profile Photo</Label>
+  <Input
+    type="file"
+    accept="image/*"
+    onChange={(e) =>
+      setTitleData({
+        ...titleData,
+        profile_photo: e.target.files?.[0] || null,
+      })
+    }
+  />
+
+  {/* نمایش تصویر — هم برای فایل جدید، هم فایل ذخیره‌شده از بک‌اند */}
+  {titleData?.profile_photo && (
+    <img
+      src={
+        titleData.profile_photo instanceof File
+          ? URL.createObjectURL(titleData.profile_photo)
+          : `http://localhost:8000${titleData.profile_photo}`
+      }
+      alt="Profile"
+      className="mt-2 w-24 h-24 object-cover rounded-full border"
+    />
+  )}
+</div>
+
+
+
       <Button onClick={handleClick} className="flex-0 w-20">
         {" "}
         Done

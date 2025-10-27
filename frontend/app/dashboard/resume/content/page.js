@@ -119,28 +119,48 @@ export default function ResumeContent() {
 
   const sendData = async () => {
     try {
-      const res = await axios.post(
-        "http://localhost:8000/api/resume-data/",
-        resumeData
-      );
+      const formData = new FormData();
 
-      if (res.status === 200 || res.status === 201) {
-        toast("Data saved successfully!", {
-          unstyled: true,
-          className: "bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg",
-        });
-      } else {
-        toast(
-          `⚠️ Something went wrong. Server responded with status: ${res.status}`,
-          {
-            unstyled: true,
-            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
-          }
-        );
+      // title به صورت JSON
+      if (resumeData.title) {
+        const cleanTitleData = { ...resumeData.title };
+        delete cleanTitleData.user; // user را حذف کن
+        delete cleanTitleData.profile_photo; // عکس را جدا می‌کنیم
+
+        formData.append("title", JSON.stringify(cleanTitleData));
       }
+
+      // اضافه کردن فایل پروفایل فقط اگر فایل واقعی باشد
+      if (resumeData.title?.profile_photo instanceof File) {
+        formData.append("profile_photo", resumeData.title.profile_photo);
+      }
+
+      // بقیه بخش‌ها
+      formData.append("contact", JSON.stringify(resumeData.contact || {}));
+      formData.append(
+        "educations",
+        JSON.stringify(resumeData.educations || [])
+      );
+      formData.append("works", JSON.stringify(resumeData.works || []));
+      formData.append("projects", JSON.stringify(resumeData.projects || []));
+      formData.append(
+        "certifications",
+        JSON.stringify(resumeData.certifications || [])
+      );
+      formData.append("hobbies", JSON.stringify(resumeData.hobbies || []));
+      formData.append("skills", JSON.stringify(resumeData.skills || {}));
+
+      await axios.post("http://localhost:8000/api/resume-data/", formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+      });
+
+      toast("Data saved successfully!", {
+        unstyled: true,
+        className: "bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg",
+      });
     } catch (error) {
       console.error("Error saving data:", error);
-      toast("❌ Failed to save data. Please check your data or try again.", {
+      toast("❌ Failed to save data.", {
         unstyled: true,
         className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
       });
@@ -150,9 +170,11 @@ export default function ResumeContent() {
   return (
     <div className="w-3/4 p-6 space-y-6 relative rounded-lg">
       {loading && (
-        <div className=" flex justify-center items-center w-full h-full absolute bg-gray-900/80 z-1000">
-          <Loader2Icon className="animate-spin h-6 w-6 me-2" /> loading please
-          wait...
+        <div className=" bg-gray-400/25 flex justify-center items-center w-full h-full absolute z-1000 ">
+          <div className="bg-slate-950 flex p-3 rounded-md">
+            <Loader2Icon className="animate-spin h-6 w-6 me-2" /> 
+            loading please wait...
+          </div>
         </div>
       )}
       <p

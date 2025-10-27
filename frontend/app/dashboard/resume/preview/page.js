@@ -92,8 +92,15 @@ export default function ResumeThemes() {
                   <div className="flex flex-col items-center text-center gap-6">
                     {data.title && <div className="relative">
                       <Avatar className="w-32 h-32 ring-4 ring-blue-500/30 dark:ring-blue-400/30 ring-offset-4 ring-offset-white dark:ring-offset-gray-800">
-                        {data.title?.profilePhoto ? (
-                          <AvatarImage src={data.title.profilePhoto || "/placeholder.svg"} alt={data?.title?.display_name} />
+                       
+                          <img
+                            src={"http://localhost:8000" + data.title?.profile_photo}
+                            alt="Profile"
+                            className="object-cover rounded-full"
+                          />
+                        
+                        {/* {data.title?.profile_photo ? (
+                          <AvatarImage src={profilePhotoURL} alt={data?.title?.display_name} />
                         ) : (
                           <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-white">
                             {data?.title?.display_name
@@ -102,7 +109,7 @@ export default function ResumeThemes() {
                               .slice(0, 2)
                               .join("")}
                           </AvatarFallback>
-                        )}
+                        )} */}
                       </Avatar>
                     </div>}
 
@@ -767,7 +774,7 @@ export default function ResumeThemes() {
                 <div className="border border-purple-500/50 rounded-lg p-4 bg-purple-950/20">
                   <div className="w-24 h-24 mx-auto mb-4 rounded-full border-4 border-purple-500 p-1">
                     <Avatar className="w-full h-full">
-                      <AvatarImage src={data.title.profilePhoto || "/placeholder.svg"} />
+                      <AvatarImage src={data.title.profile_photo || "/placeholder.svg"} />
                       <AvatarFallback className="bg-gradient-to-br from-cyan-500 to-purple-500 text-white font-bold">
                         {data.title.display_name.split(" ").map((p) => p[0]).join("")}
                       </AvatarFallback>
@@ -1167,8 +1174,8 @@ export default function ResumeThemes() {
 //               <div className="flex flex-col items-center text-center gap-6">
 //                 <div className="relative">
 //                   <Avatar className="w-32 h-32 ring-4 ring-blue-500/30 dark:ring-blue-400/30 ring-offset-4 ring-offset-white dark:ring-offset-gray-800">
-//                     {data.title?.profilePhoto ? (
-//                       <AvatarImage src={data.title.profilePhoto || "/placeholder.svg"} alt={data?.title?.display_name} />
+//                     {data.title?.profile_photo ? (
+//                       <AvatarImage src={data.title.profile_photo || "/placeholder.svg"} alt={data?.title?.display_name} />
 //                     ) : (
 //                       <AvatarFallback className="text-2xl font-bold bg-gradient-to-br from-blue-600 to-purple-600 dark:from-blue-400 dark:to-purple-400 text-white">
 //                         {data?.title?.display_name
