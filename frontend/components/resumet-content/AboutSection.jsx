@@ -28,7 +28,7 @@ export default function AboutSection({
   return (
     <div className="flex flex-col gap-4 p-3 rounded-md">
       <div>
-        <Label className="mb-2">About</Label>
+        <Label className="mb-2">About *</Label>
         <Textarea
           placeholder="Write about yourself"
           value={titleData.about}
@@ -43,7 +43,7 @@ export default function AboutSection({
       </div>
 
       <div>
-        <Label className="mb-2">Display Name</Label>
+        <Label className="mb-2">Display Name *</Label>
         <Input
           placeholder="Display Name"
           value={titleData.display_name}
@@ -58,7 +58,7 @@ export default function AboutSection({
       </div>
 
       <div>
-        <Label className="mb-2">Title</Label>
+        <Label className="mb-2">Title *</Label>
         <Input
           placeholder="Title"
           value={titleData.title}

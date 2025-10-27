@@ -125,9 +125,9 @@ export default function ResumeContent() {
       );
 
       if (res.status === 200 || res.status === 201) {
-        toast("✅ Data saved successfully!", {
+        toast("Data saved successfully!", {
           unstyled: true,
-          className: "bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg",
+          className: "bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg",
         });
       } else {
         toast(
@@ -169,7 +169,7 @@ export default function ResumeContent() {
           value="about"
           className="dark:bg-gray-500 bg-gray-100 text-black rounded-md px-3 mb-3 border-none"
         >
-          <AccordionTrigger>About</AccordionTrigger>
+          <AccordionTrigger>Title Info</AccordionTrigger>
           <AccordionContent>
             <AboutSection
               resumeData={resumeData}
