@@ -6,6 +6,7 @@ class Title(models.Model):
     display_name = models.CharField(max_length=255, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_photo = models.ImageField(upload_to='profile_photos')
+    theme = models.IntegerField()
     def __str__(self):
         return self.display_name or self.title
 class Contact(models.Model):

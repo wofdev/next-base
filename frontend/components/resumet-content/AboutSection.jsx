@@ -4,6 +4,8 @@ import { Textarea } from "@/components/ui/textarea";
 import { Button } from "@/components/ui/button";
 import { Label } from "@/components/ui/label";
 import { toast } from "sonner";
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
 
 export default function AboutSection({
   resumeData,
@@ -74,7 +76,7 @@ export default function AboutSection({
           className="w-full dark:bg-gray-400 bg-gray-50"
         />
       </div>
-{/* 
+
       <div>
         <Label className="mb-2">Profile Photo</Label>
         <Input
@@ -87,41 +89,45 @@ export default function AboutSection({
             })
           }
         />
-        <img
-          src={"http://localhost:8000" + titleData.profile_photo}
-          alt="Profile"
-          className="mt-2 w-24 h-24 object-cover rounded-full border"
-        />
-      </div> */}
 
+        {/* نمایش تصویر — هم برای فایل جدید، هم فایل ذخیره‌شده از بک‌اند */}
+        {titleData?.profile_photo && (
+          <img
+            src={
+              titleData.profile_photo instanceof File
+                ? URL.createObjectURL(titleData.profile_photo)
+                : `http://localhost:8000${titleData.profile_photo}`
+            }
+            alt="Profile"
+            className="mt-2 w-24 h-24 object-cover rounded-full border"
+          />
+        )}
+      </div>
+
+      {/* Theme Dropdown with shadcn */}
       <div>
-  <Label className="mb-2">Profile Photo</Label>
-  <Input
-    type="file"
-    accept="image/*"
-    onChange={(e) =>
-      setTitleData({
-        ...titleData,
-        profile_photo: e.target.files?.[0] || null,
-      })
-    }
-  />
-
-  {/* نمایش تصویر — هم برای فایل جدید، هم فایل ذخیره‌شده از بک‌اند */}
-  {titleData?.profile_photo && (
-    <img
-      src={
-        titleData.profile_photo instanceof File
-          ? URL.createObjectURL(titleData.profile_photo)
-          : `http://localhost:8000${titleData.profile_photo}`
-      }
-      alt="Profile"
-      className="mt-2 w-24 h-24 object-cover rounded-full border"
-    />
-  )}
-</div>
-
-
+        <Label className="mb-2">Theme</Label>
+        <Select
+          value={titleData.theme}
+          onValueChange={(value) =>
+            setTitleData({
+              ...titleData,
+              theme: value,
+            })
+          }
+        >
+          <SelectTrigger className="w-full">
+            <SelectValue placeholder="Select theme" />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value={1}>modern</SelectItem>
+            <SelectItem value={2}>grass</SelectItem>
+            <SelectItem value={3}>mango</SelectItem>
+            <SelectItem value={4}>cyberpunk</SelectItem>
+            <SelectItem value={5}>classic</SelectItem>
+          </SelectContent>
+        </Select>
+      </div>
 
       <Button onClick={handleClick} className="flex-0 w-20">
         {" "}
