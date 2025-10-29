@@ -6,7 +6,7 @@ import { Badge } from "@/components/ui/badge"
 import { Button } from "@/components/ui/button"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Separator } from "@/components/ui/separator"
-import { Phone, Mail, Globe, Github, Instagram, Twitter, Briefcase, GraduationCap, Award, Heart, Code, Info, Sun, Moon, MapPin, Calendar, Sparkles, Zap, Star, Rocket, Target, TrendingUp, Linkedin } from 'lucide-react'
+import { Phone, Mail, Globe, Github, Instagram, Twitter, Briefcase, GraduationCap, Award, Heart, Code, Info, Sun, Moon, MapPin, Calendar, Sparkles, Zap, Star, Rocket, Target, TrendingUp, Linkedin, Paperclip, PhilippinePeso, PhoneCall, Smile } from 'lucide-react'
 import axios from "axios"
 // Sample data structure
 
@@ -59,7 +59,6 @@ export default function ResumeThemes() {
               style={{ animationDelay: "0.2s" }}
             >
               <CardContent className="p-8">
-                <div>{console.log(data.title)}</div>
                 <div className="flex flex-col items-center text-center gap-6">
                   {
                     data.title && <div className="relative">
@@ -199,6 +198,46 @@ export default function ResumeThemes() {
                   <p className="leading-relaxed text-pretty text-gray-700 dark:text-gray-300">{data.title?.about}</p>
                 </CardContent>
               </Card>
+
+              <Card
+                className={`backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 border-gray-200 dark:border-gray-700 hover:border-blue-500/40 transition-all duration-300 ${isVisible ? "animate-slide-in-up" : "opacity-0"}`}
+                style={{ animationDelay: "0.8s" }}
+              >
+                <CardHeader>
+                  <CardTitle className="flex items-center gap-3 text-xl text-gray-900 dark:text-white">
+                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+                      <GraduationCap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
+                    </div>
+                    Education
+                  </CardTitle>
+                </CardHeader>
+                <CardContent>
+                  {data.educations && data.educations.length ? (
+                    <div className="space-y-4">
+                      {data.educations.map((ed, idx) => (
+                        <div
+                          key={idx}
+                          className="p-4 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50/50 dark:bg-gray-800/30 hover:bg-gray-100/60 dark:hover:bg-gray-700/40 transition-all duration-300 hover:border-blue-500/30 backdrop-blur-sm"
+                        >
+                          <div className="flex justify-between items-start mb-3">
+                            <h3 className="font-semibold text-balance text-gray-900 dark:text-white">{ed.title}</h3>
+                            <Badge
+                              variant="outline"
+                              className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700"
+                            >
+                              {fmt(ed.from_date)} - {fmt(ed.to_date)}
+                            </Badge>
+                          </div>
+                          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{ed.description}</p>
+                        </div>
+                      ))}
+                    </div>
+                  ) : (
+                    <p className="text-sm text-gray-600 dark:text-gray-400">No education added.</p>
+                  )}
+                </CardContent>
+              </Card>
+
               <Card
                 className={`backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 border-gray-200 dark:border-gray-700 hover:border-blue-500/40 transition-all duration-300 ${isVisible ? "animate-slide-in-up" : "opacity-0"}`}
                 style={{ animationDelay: "0.6s" }}
@@ -239,44 +278,7 @@ export default function ResumeThemes() {
                   )}
                 </CardContent>
               </Card>
-              <Card
-                className={`backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 border-gray-200 dark:border-gray-700 hover:border-blue-500/40 transition-all duration-300 ${isVisible ? "animate-slide-in-up" : "opacity-0"}`}
-                style={{ animationDelay: "0.8s" }}
-              >
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-3 text-xl text-gray-900 dark:text-white">
-                    <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
-                      <GraduationCap className="w-5 h-5 text-blue-600 dark:text-blue-400" />
-                    </div>
-                    Education
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  {data.educations && data.educations.length ? (
-                    <div className="space-y-4">
-                      {data.educations.map((ed, idx) => (
-                        <div
-                          key={idx}
-                          className="p-4 border border-gray-200 dark:border-gray-700 rounded-xl bg-gray-50/50 dark:bg-gray-800/30 hover:bg-gray-100/60 dark:hover:bg-gray-700/40 transition-all duration-300 hover:border-blue-500/30 backdrop-blur-sm"
-                        >
-                          <div className="flex justify-between items-start mb-3">
-                            <h3 className="font-semibold text-balance text-gray-900 dark:text-white">{ed.title}</h3>
-                            <Badge
-                              variant="outline"
-                              className="text-xs bg-blue-100 dark:bg-blue-900/30 text-blue-700 dark:text-blue-300 border-blue-200 dark:border-blue-700"
-                            >
-                              {fmt(ed.from_date)} - {fmt(ed.to_date)}
-                            </Badge>
-                          </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-400 leading-relaxed">{ed.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                  ) : (
-                    <p className="text-sm text-gray-600 dark:text-gray-400">No education added.</p>
-                  )}
-                </CardContent>
-              </Card>
+
               <Card
                 className={`backdrop-blur-sm bg-white/80 dark:bg-gray-800/80 border-gray-200 dark:border-gray-700 hover:border-blue-500/40 transition-all duration-300 ${isVisible ? "animate-slide-in-up" : "opacity-0"}`}
                 style={{ animationDelay: "1.0s" }}
@@ -467,6 +469,23 @@ export default function ResumeThemes() {
                 <div className="relative">
                   <div className="absolute left-0 top-0 bottom-0 w-0.5 bg-emerald-300 dark:bg-emerald-700"></div>
                   <div className="space-y-8 pl-8">
+
+                    <div>
+                      <div className="absolute left-0 w-4 h-4 bg-teal-500 rounded-full -ml-[7px]"></div>
+                      <h3 className="text-xl font-bold mb-4 text-emerald-900 dark:text-emerald-100">Education</h3>
+                      {data.educations.map((ed, idx) => (
+                        <div key={idx} className="mb-6 bg-white dark:bg-slate-800 p-4 rounded-lg">
+                          <div className="flex justify-between items-start mb-2">
+                            <h4 className="font-semibold text-gray-900 dark:text-gray-100">{ed.title}</h4>
+                            <span className="text-xs text-teal-600 dark:text-teal-400">
+                              {fmt(ed.from_date)} - {fmt(ed.to_date)}
+                            </span>
+                          </div>
+                          <p className="text-sm text-gray-600 dark:text-gray-400">{ed.description}</p>
+                        </div>
+                      ))}
+                    </div>
+
                     <div>
                       <div className="absolute left-0 w-4 h-4 bg-emerald-500 rounded-full -ml-[7px]"></div>
                       <h3 className="text-xl font-bold mb-4 text-emerald-900 dark:text-emerald-100">Experience</h3>
@@ -483,25 +502,25 @@ export default function ResumeThemes() {
                       ))}
                     </div>
                     <div>
-                      <div className="absolute left-0 w-4 h-4 bg-teal-500 rounded-full -ml-[7px]"></div>
-                      <h3 className="text-xl font-bold mb-4 text-emerald-900 dark:text-emerald-100">Education</h3>
-                      {data.educations.map((ed, idx) => (
-                        <div key={idx} className="mb-6 bg-white dark:bg-slate-800 p-4 rounded-lg">
-                          <div className="flex justify-between items-start mb-2">
-                            <h4 className="font-semibold text-gray-900 dark:text-gray-100">{ed.title}</h4>
-                            <span className="text-xs text-teal-600 dark:text-teal-400">
-                              {fmt(ed.from_date)} - {fmt(ed.to_date)}
-                            </span>
-                          </div>
-                          <p className="text-sm text-gray-600 dark:text-gray-400">{ed.description}</p>
-                        </div>
-                      ))}
-                    </div>
-                    <div>
                       <div className="absolute left-0 w-4 h-4 bg-cyan-500 rounded-full -ml-[7px]"></div>
                       <h3 className="text-xl font-bold mb-4 text-emerald-900 dark:text-emerald-100">Projects</h3>
                       <div className="grid md:grid-cols-2 gap-4">
                         {data.projects.map((p, idx) => (
+                          <div key={idx} className="bg-white dark:bg-slate-800 p-4 rounded-lg">
+                            <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{p.title}</h4>
+                            <p className="text-xs text-emerald-600 dark:text-emerald-400 mb-2">
+                              {fmt(p.from_date)} - {fmt(p.to_date)}
+                            </p>
+                            <p className="text-sm text-gray-600 dark:text-gray-400">{p.description}</p>
+                          </div>
+                        ))}
+                      </div>
+                    </div>
+                    <div>
+                      <div className="absolute left-0 w-4 h-4 bg-cyan-500 rounded-full -ml-[7px]"></div>
+                      <h3 className="text-xl font-bold mb-4 text-emerald-900 dark:text-emerald-100">Certifications</h3>
+                      <div className="grid md:grid-cols-2 gap-4">
+                        {data.certifications.map((p, idx) => (
                           <div key={idx} className="bg-white dark:bg-slate-800 p-4 rounded-lg">
                             <h4 className="font-semibold text-gray-900 dark:text-gray-100 mb-2">{p.title}</h4>
                             <p className="text-xs text-emerald-600 dark:text-emerald-400 mb-2">
@@ -523,7 +542,7 @@ export default function ResumeThemes() {
       {data?.title?.theme == 3 && (
         <div className="min-h-screen bg-gradient-to-br from-orange-100 via-red-50 to-pink-100 dark:from-gray-900 dark:via-red-950 dark:to-orange-950 rounded-2xl p-8">
           <div className="max-w-7xl mx-auto">
-            <div className="bg-gradient-to-r from-orange-600 to-red-600 dark:from-orange-700 dark:to-red-700 rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
+            <div className="bg-gradient-to-r from-orange-600 to-amber-300 dark:from-orange-700 dark:to-red-700 rounded-2xl p-8 mb-8 text-white relative overflow-hidden">
               <div className="absolute top-0 right-0 w-64 h-64 bg-white/10 rounded-full -mr-32 -mt-32"></div>
               <div className="absolute bottom-0 left-0 w-48 h-48 bg-white/10 rounded-full -ml-24 -mb-24"></div>
               <div className="relative z-10 flex flex-col sm:flex-row justify-between items-center sm:items-start gap-6 sm:gap-8">
@@ -539,8 +558,8 @@ export default function ResumeThemes() {
                   )}
                   <div className="text-center sm:text-left">
                     <h1 className="text-3xl sm:text-5xl font-black mb-3">{data.title.display_name}</h1>
-                    <p className="text-xl sm:text-2xl font-light text-orange-100">{data.title.title}</p>
-                    <p className="mt-4 text-orange-50 max-w-2xl">{data.title.about}</p>
+                    <p className="text-xl sm:text-2xl font-light text-red-100">{data.title.title}</p>
+                    <p className="mt-4 text-red-50 max-w-2xl">{data.title.about}</p>
                   </div>
                 </div>
               </div>
@@ -548,19 +567,19 @@ export default function ResumeThemes() {
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
+                  <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
                     <Phone className="w-5 h-5 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">Contact</h3>
                 </div>
                 <div className="space-y-3 text-sm">
-                  <div className="flex gap-2"> <Phone className="w-4 h-4 text-orange-600 dark:text-orange-400" />{data.contact.phone && <div className="text-gray-700 dark:text-gray-300">{data.contact.phone}</div>}</div>
-                  <div className="flex gap-2"> <Mail className="w-4 h-4 text-orange-600 dark:text-orange-400" />{data.contact.email && <div className="text-gray-700 dark:text-gray-300">{data.contact.email}</div>}</div>
-                  <div className="flex gap-2"> <Globe className="w-4 h-4 text-orange-600 dark:text-orange-400" />{data.contact.website && <div className="text-gray-700 dark:text-gray-300">{data.contact.website.replace(/^https?:\/\//, "")}</div>}</div>
-                  <div className="flex gap-2"> <Github className="w-4 h-4 text-orange-600 dark:text-orange-400" />{data.contact.github && <div className="text-gray-700 dark:text-gray-300">{data.contact.github}</div>}</div>
-                  <div className="flex gap-2"> <Linkedin className="w-4 h-4 text-orange-600 dark:text-orange-400" />{data.contact.linkedin && <div className="text-gray-700 dark:text-gray-300">{data.contact.linkedin}</div>}</div>
-                  <div className="flex gap-2"> <Twitter className="w-4 h-4 text-orange-600 dark:text-orange-400" />{data.contact.twitter && <div className="text-gray-700 dark:text-gray-300">{data.contact.twitter}</div>}</div>
-                  <div className="flex gap-2"> <Instagram className="w-4 h-4 text-orange-600 dark:text-orange-400" />{data.contact.instagram && <div className="text-gray-700 dark:text-gray-300">{data.contact.instagram}</div>}</div>
+                  <div className="flex gap-2"> <Phone className="w-4 h-4 text-red-600 dark:text-red-400" />{data.contact.phone && <div className="text-gray-700 dark:text-gray-300">{data.contact.phone}</div>}</div>
+                  <div className="flex gap-2"> <Mail className="w-4 h-4 text-red-600 dark:text-red-400" />{data.contact.email && <div className="text-gray-700 dark:text-gray-300">{data.contact.email}</div>}</div>
+                  <div className="flex gap-2"> <Globe className="w-4 h-4 text-red-600 dark:text-red-400" />{data.contact.website && <div className="text-gray-700 dark:text-gray-300">{data.contact.website.replace(/^https?:\/\//, "")}</div>}</div>
+                  <div className="flex gap-2"> <Github className="w-4 h-4 text-red-600 dark:text-red-400" />{data.contact.github && <div className="text-gray-700 dark:text-gray-300">{data.contact.github}</div>}</div>
+                  <div className="flex gap-2"> <Linkedin className="w-4 h-4 text-red-600 dark:text-red-400" />{data.contact.linkedin && <div className="text-gray-700 dark:text-gray-300">{data.contact.linkedin}</div>}</div>
+                  <div className="flex gap-2"> <Twitter className="w-4 h-4 text-red-600 dark:text-red-400" />{data.contact.twitter && <div className="text-gray-700 dark:text-gray-300">{data.contact.twitter}</div>}</div>
+                  <div className="flex gap-2"> <Instagram className="w-4 h-4 text-red-600 dark:text-red-400" />{data.contact.instagram && <div className="text-gray-700 dark:text-gray-300">{data.contact.instagram}</div>}</div>
                 </div>
               </div>
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg md:col-span-2">
@@ -573,35 +592,14 @@ export default function ResumeThemes() {
                 <div className="grid md:grid-cols-3 gap-4">
                   {Object.entries(data.skills).map(([cat, arr]) => (
                     <div key={cat}>
-                      <h4 className="text-xs uppercase font-bold text-orange-600 dark:text-orange-400 mb-2">{cat}</h4>
+                      <h4 className="text-xs uppercase font-bold text-red-600 dark:text-red-400 mb-2">{cat}</h4>
                       <div className="flex flex-wrap gap-2">
                         {arr.map((s, i) => (
-                          <span key={i} className="px-3 py-1 bg-orange-100 dark:bg-orange-900/30 text-orange-700 dark:text-orange-300 rounded-full text-xs font-medium">
+                          <span key={i} className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-xs font-medium">
                             {s}
                           </span>
                         ))}
                       </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg lg:col-span-2">
-                <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-orange-500 rounded-lg flex items-center justify-center">
-                    <Briefcase className="w-5 h-5 text-white" />
-                  </div>
-                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Experience</h3>
-                </div>
-                <div className="space-y-4">
-                  {data.works.map((w, idx) => (
-                    <div key={idx} className="border-l-4 border-orange-500 pl-4">
-                      <div className="flex justify-between items-start mb-1">
-                        <h4 className="font-bold text-gray-900 dark:text-white">{w.title}</h4>
-                        <span className="text-xs text-orange-600 dark:text-orange-400 font-semibold">
-                          {fmt(w.from_date)} - {fmt(w.to_date)}
-                        </span>
-                      </div>
-                      <p className="text-sm text-gray-600 dark:text-gray-400">{w.description}</p>
                     </div>
                   ))}
                 </div>
@@ -625,34 +623,82 @@ export default function ResumeThemes() {
                   ))}
                 </div>
               </div>
-              {data.projects.map((p, idx) => (
-                <div key={idx} className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
-                  <div className="flex items-center gap-3 mb-3">
-                    <div className="w-8 h-8 bg-gradient-to-br from-orange-500 to-red-500 rounded-lg flex items-center justify-center">
-                      <Code className="w-4 h-4 text-white" />
-                    </div>
-                    <h4 className="font-bold text-gray-900 dark:text-white">{p.title}</h4>
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg lg:col-span-2">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
+                    <Briefcase className="w-5 h-5 text-white" />
                   </div>
-                  <p className="text-xs text-orange-600 dark:text-orange-400 mb-2">
-                    {fmt(p.from_date)} - {fmt(p.to_date)}
-                  </p>
-                  <p className="text-sm text-gray-600 dark:text-gray-400">{p.description}</p>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Experience</h3>
                 </div>
-              ))}
+                <div className="space-y-4">
+                  {data.works.map((w, idx) => (
+                    <div key={idx} className="border-l-4 border-red-500 pl-4">
+                      <div className="flex justify-between items-start mb-1">
+                        <h4 className="font-bold text-gray-900 dark:text-white">{w.title}</h4>
+                        <span className="text-xs text-red-600 dark:text-red-400 font-semibold">
+                          {fmt(w.from_date)} - {fmt(w.to_date)}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{w.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg lg:col-span-2">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
+                    <Code className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Projects</h3>
+                </div>
+                <div className="space-y-4">
+                  {data.projects.map((w, idx) => (
+                    <div key={idx} className="border-l-4 border-red-500 pl-4">
+                      <div className="flex justify-between items-start mb-1">
+                        <h4 className="font-bold text-gray-900 dark:text-white">{w.title}</h4>
+                        <span className="text-xs text-red-600 dark:text-red-400 font-semibold">
+                          {fmt(w.from_date)} - {fmt(w.to_date)}
+                        </span>
+                      </div>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{w.description}</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
               <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg">
                 <div className="flex items-center gap-3 mb-4">
-                  <div className="w-10 h-10 bg-pink-500 rounded-lg flex items-center justify-center">
-                    <Award className="w-5 h-5 text-white" />
+                  <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
+                    <Paperclip className="w-5 h-5 text-white" />
                   </div>
                   <h3 className="text-xl font-bold text-gray-900 dark:text-white">Certifications</h3>
                 </div>
-                <div className="space-y-3">
-                  {data.certifications.map((c, idx) => (
+                <div className="space-y-4">
+                  {data.certifications.map((ed, idx) => (
                     <div key={idx}>
-                      <h4 className="font-semibold text-gray-900 dark:text-white text-sm">{c.title}</h4>
-                      <p className="text-xs text-pink-600 dark:text-pink-400">{fmt(c.from_date)}</p>
+                      <h4 className="font-semibold text-gray-900 dark:text-white text-sm mb-1">{ed.title}</h4>
+                      <p className="text-xs text-red-600 dark:text-red-400 mb-2">
+                        {fmt(ed.from_date)} - {fmt(ed.to_date)}
+                      </p>
+                      <p className="text-sm text-gray-600 dark:text-gray-400">{ed.description}</p>
                     </div>
                   ))}
+                </div>
+              </div>
+              <div className="bg-white dark:bg-gray-800 rounded-xl p-6 shadow-lg md:col-span-2">
+                <div className="flex items-center gap-3 mb-4">
+                  <div className="w-10 h-10 bg-red-500 rounded-lg flex items-center justify-center">
+                    <Smile className="w-5 h-5 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold text-gray-900 dark:text-white">Hobbies</h3>
+                </div>
+                <div className="grid md:grid-cols-3 gap-4">
+                  <div className="flex flex-wrap gap-2">
+                    {data.hobbies.map((s, i) => (
+                      <span key={i} className="px-3 py-1 bg-red-100 dark:bg-red-900/30 text-red-700 dark:text-red-300 rounded-full text-xs font-medium">
+                        {s.title}
+                      </span>
+                    ))}
+                  </div>
                 </div>
               </div>
             </div>
@@ -741,6 +787,24 @@ export default function ResumeThemes() {
                 </div>
                 <div className="border border-purple-500/50 rounded-lg p-6 bg-gradient-to-br from-purple-950/20 to-pink-950/20">
                   <h3 className="text-purple-400 font-mono text-lg mb-4 flex items-center gap-2">
+                    <span className="text-cyan-500">&gt;&gt;</span> EDUCATION.LOG
+                  </h3>
+                  <div className="space-y-4">
+                    {data.educations.map((w, idx) => (
+                      <div key={idx} className="border-l-2 border-purple-500 pl-4">
+                        <div className="flex justify-between items-start mb-1">
+                          <h4 className="text-cyan-300 font-mono text-sm font-bold">{w.title}</h4>
+                          <span className="text-xs text-pink-400 font-mono">
+                            [{fmt(w.from_date)} - {fmt(w.to_date)}]
+                          </span>
+                        </div>
+                        <p className="text-gray-400 text-xs font-mono">{w.description}</p>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+                <div className="border border-purple-500/50 rounded-lg p-6 bg-gradient-to-br from-purple-950/20 to-pink-950/20">
+                  <h3 className="text-purple-400 font-mono text-lg mb-4 flex items-center gap-2">
                     <span className="text-cyan-500">&gt;&gt;</span> EXPERIENCE.LOG
                   </h3>
                   <div className="space-y-4">
@@ -757,42 +821,50 @@ export default function ResumeThemes() {
                     ))}
                   </div>
                 </div>
-                <div className="grid md:grid-cols-2 gap-4">
-                  {data.projects.map((p, idx) => (
-                    <div key={idx} className="border border-pink-500/50 rounded-lg p-4 bg-gradient-to-br from-pink-950/20 to-purple-950/20 hover:border-pink-500 transition-colors">
-                      <div className="flex items-center gap-2 mb-2">
-                        <div className="w-2 h-2 bg-pink-500 rounded-full animate-pulse"></div>
-                        <h4 className="text-pink-300 font-mono text-sm font-bold">{p.title}</h4>
+                <div className="border border-purple-500/50 rounded-lg p-6 bg-gradient-to-br from-purple-950/20 to-pink-950/20">
+                  <h3 className="text-purple-400 font-mono text-lg mb-4 flex items-center gap-2">
+                    <span className="text-cyan-500">&gt;&gt;</span> PROJECTS.LOG
+                  </h3>
+                  <div className="space-y-4">
+                    {data.projects.map((w, idx) => (
+                      <div key={idx} className="border-l-2 border-purple-500 pl-4">
+                        <div className="flex justify-between items-start mb-1">
+                          <h4 className="text-cyan-300 font-mono text-sm font-bold">{w.title}</h4>
+                          <span className="text-xs text-pink-400 font-mono">
+                            [{fmt(w.from_date)} - {fmt(w.to_date)}]
+                          </span>
+                        </div>
+                        <p className="text-gray-400 text-xs font-mono">{w.description}</p>
                       </div>
-                      <p className="text-xs text-cyan-400 font-mono mb-2">
-                        [{fmt(p.from_date)} - {fmt(p.to_date)}]
-                      </p>
-                      <p className="text-gray-400 text-xs font-mono">{p.description}</p>
-                    </div>
-                  ))}
+                    ))}
+                  </div>
+                </div>
+                <div className="border border-purple-500/50 rounded-lg p-6 bg-gradient-to-br from-purple-950/20 to-pink-950/20">
+                  <h3 className="text-purple-400 font-mono text-lg mb-4 flex items-center gap-2">
+                    <span className="text-cyan-500">&gt;&gt;</span> CERTIFICATIOS.SAVED
+                  </h3>
+                  <div className="space-y-4">
+                    {data.certifications.map((w, idx) => (
+                      <div key={idx} className="border-l-2 border-purple-500 pl-4">
+                        <div className="flex justify-between items-start mb-1">
+                          <h4 className="text-cyan-300 font-mono text-sm font-bold">{w.title}</h4>
+                          <span className="text-xs text-pink-400 font-mono">
+                            [{fmt(w.from_date)} - {fmt(w.to_date)}]
+                          </span>
+                        </div>
+                        <p className="text-gray-400 text-xs font-mono">{w.description}</p>
+                      </div>
+                    ))}
+                  </div>
                 </div>
                 <div className="grid md:grid-cols-2 gap-4">
                   <div className="border border-cyan-500/50 rounded-lg p-4 bg-cyan-950/20">
                     <h3 className="text-cyan-400 font-mono text-sm mb-3 flex items-center gap-2">
-                      <span className="text-purple-500">&gt;</span> EDUCATION.DB
+                      <span className="text-purple-500">&gt;</span> HOBBIES.FUN
                     </h3>
-                    {data.educations.map((ed, idx) => (
+                    {data.hobbies.map((ed, idx) => (
                       <div key={idx} className="mb-3">
                         <h4 className="text-gray-300 font-mono text-xs font-bold">{ed.title}</h4>
-                        <p className="text-cyan-400 text-xs font-mono">
-                          [{fmt(ed.from_date)} - {fmt(ed.to_date)}]
-                        </p>
-                      </div>
-                    ))}
-                  </div>
-                  <div className="border border-pink-500/50 rounded-lg p-4 bg-pink-950/20">
-                    <h3 className="text-pink-400 font-mono text-sm mb-3 flex items-center gap-2">
-                      <span className="text-cyan-500">&gt;</span> CERTS.DAT
-                    </h3>
-                    {data.certifications.map((c, idx) => (
-                      <div key={idx} className="mb-3">
-                        <h4 className="text-gray-300 font-mono text-xs font-bold">{c.title}</h4>
-                        <p className="text-pink-400 text-xs font-mono">[{fmt(c.from_date)}]</p>
                       </div>
                     ))}
                   </div>
@@ -808,8 +880,9 @@ export default function ResumeThemes() {
           <div className="max-w-5xl mx-auto">
             {/* Classic Header */}
             <div className="flex flex-col md:flex-row items-center md:items-start gap-6 mb-12 pb-8 border-b-2 border-amber-800 dark:border-amber-200">
+              {/* پروفایل */}
               {data.title?.profile_photo && (
-                <div className="w-36 h-36 rounded-full flex-shrink-0">
+                <div className="w-32 h-32 md:w-36 md:h-36 rounded-full flex-shrink-0">
                   <Avatar className="w-full h-full">
                     <img
                       src={"http://localhost:8000" + data.title.profile_photo}
@@ -819,21 +892,94 @@ export default function ResumeThemes() {
                   </Avatar>
                 </div>
               )}
-              <div className="text-center md:text-left">
-                <h1 className="text-4xl md:text-6xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-2">
-                  {data.title.display_name}
-                </h1>
-                <p className="text-lg md:text-xl text-amber-700 dark:text-amber-300 font-serif italic mb-4">
-                  {data.title.title}
-                </p>
-                <div className="flex flex-wrap gap-2 md:gap-6 text-sm text-amber-800 dark:text-amber-200">
-                  <div className="flex gap-2"> <Phone className="w-4 h-4 text-amber-800 dark:text-amber-400" />{data.contact.phone && <div className="text-amber-700 dark:text-amber-700">{data.contact.phone}</div>}</div>
-                  <div className="flex gap-2"> <Mail className="w-4 h-4 text-amber-800 dark:text-amber-400" />{data.contact.email && <div className="text-amber-700 dark:text-amber-700">{data.contact.email}</div>}</div>
-                  <div className="flex gap-2"> <Globe className="w-4 h-4 text-amber-800 dark:text-amber-400" />{data.contact.website && <div className="text-amber-700 dark:text-amber-700">{data.contact.website.replace(/^https?:\/\//, "")}</div>}</div>
-                  <div className="flex gap-2"> <Github className="w-4 h-4 text-amber-800 dark:text-amber-400" />{data.contact.github && <div className="text-amber-700 dark:text-amber-700">{data.contact.github}</div>}</div>
-                  <div className="flex gap-2"> <Linkedin className="w-4 h-4 text-amber-800 dark:text-amber-400" />{data.contact.linkedin && <div className="text-amber-700 dark:text-amber-700">{data.contact.linkedin}</div>}</div>
-                  <div className="flex gap-2"> <Twitter className="w-4 h-4 text-amber-800 dark:text-amber-400" />{data.contact.twitter && <div className="text-amber-700 dark:text-amber-700">{data.contact.twitter}</div>}</div>
-                  <div className="flex gap-2"> <Instagram className="w-4 h-4 text-amber-800 dark:text-amber-400" />{data.contact.instagram && <div className="text-amber-700 dark:text-amber-700">{data.contact.instagram}</div>}</div>
+
+              {/* اطلاعات سمت راست */}
+              <div className="flex flex-col md:flex-row justify-between w-full text-center md:text-left gap-6  dark:bg-transparent p-4 md:p-0">
+                {/* بخش نام و عنوان */}
+                <div className="flex-1">
+                  <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-2 break-words">
+                    {data.title.display_name}
+                  </h1>
+                  <p className="text-base sm:text-lg md:text-xl text-amber-700 dark:text-amber-300 font-serif italic mb-4">
+                    {data.title.title}
+                  </p>
+                </div>
+                {/* بخش اطلاعات تماس */}
+                <div className="overflow-x-auto w-full md:w-auto">
+                  <table className="min-w-full border-collapse dark:border-amber-200 rounded-lg text-sm sm:text-base">
+                    <tbody className="divide-y divide-amber-700 dark:divide-amber-300">
+                      {data.contact.phone && (
+                        <tr className="hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
+                          <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap">
+                            <Phone className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+                          </td>
+                          <td className="px-4 py-2 text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                            <span className="truncate">{data.contact.phone}</span>
+                          </td>
+                        </tr>
+                      )}
+                      {data.contact.email && (
+                        <tr className="hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
+                          <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap">
+                            <Mail className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+                          </td>
+                          <td className="px-4 py-2 text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                            <span className="truncate">{data.contact.email}</span>
+                          </td>
+                        </tr>
+                      )}
+                      {data.contact.website && (
+                        <tr className="hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
+                          <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap">
+                            <Globe className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+                          </td>
+                          <td className="px-4 py-2 text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                            <span className="truncate">{data.contact.website.replace(/^https?:\/\//, "")}</span>
+                          </td>
+                        </tr>
+                      )}
+                      {data.contact.github && (
+                        <tr className="hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
+                          <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap">
+                            <Github className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+                          </td>
+                          <td className="px-4 py-2 text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                            <span className="truncate">{data.contact.github}</span>
+                          </td>
+                        </tr>
+                      )}
+                      {data.contact.linkedin && (
+                        <tr className="hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
+                          <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap">
+                            <Linkedin className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+                          </td>
+                          <td className="px-4 py-2 text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                            <span className="truncate">{data.contact.linkedin}</span>
+                          </td>
+                        </tr>
+                      )}
+                      {data.contact.twitter && (
+                        <tr className="hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
+                          <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap">
+                            <Twitter className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+                          </td>
+                          <td className="px-4 py-2 text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                            <span className="truncate">{data.contact.twitter}</span>
+                          </td>
+                        </tr>
+                      )}
+                      {data.contact.instagram && (
+                        <tr className="hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
+                          <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap">
+                            <Instagram className="w-4 h-4 text-amber-700 dark:text-amber-400" />
+                          </td>
+                          <td className="px-4 py-2 text-amber-800 dark:text-amber-200 flex items-center gap-2">
+                            <span className="truncate">{data.contact.instagram}</span>
+                          </td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -841,7 +987,7 @@ export default function ResumeThemes() {
             <div className="mb-10">
               <h2 className="text-3xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
-                Professional Summary
+                About me
               </h2>
               <p className="text-amber-800 dark:text-amber-200 leading-relaxed font-serif text-lg pl-16">
                 {data.title.about}
@@ -851,21 +997,18 @@ export default function ResumeThemes() {
             <div className="mb-10">
               <h2 className="text-3xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
-                Core Competencies
+                Education
               </h2>
-              <div className="pl-16 grid md:grid-cols-3 gap-6">
-                {Object.entries(data.skills).map(([cat, arr]) => (
-                  <div key={cat}>
-                    <h3 className="text-sm uppercase tracking-wider text-amber-700 dark:text-amber-300 font-semibold mb-2 font-sans">
-                      {cat}
-                    </h3>
-                    <ul className="space-y-1">
-                      {arr.map((s, i) => (
-                        <li key={i} className="text-amber-800 dark:text-amber-200 font-serif">
-                          {s}
-                        </li>
-                      ))}
-                    </ul>
+              <div className="pl-16 space-y-4">
+                {data.educations.map((ed, idx) => (
+                  <div key={idx}>
+                    <div className="flex justify-between items-baseline mb-1">
+                      <h3 className="text-lg font-serif font-bold text-amber-900 dark:text-amber-100">{ed.title}</h3>
+                      <span className="text-sm text-amber-700 dark:text-amber-300 font-sans">
+                        {fmt(ed.from_date)} – {fmt(ed.to_date)}
+                      </span>
+                    </div>
+                    <p className="text-amber-800 dark:text-amber-200 font-serif">{ed.description}</p>
                   </div>
                 ))}
               </div>
@@ -894,27 +1037,7 @@ export default function ResumeThemes() {
             <div className="mb-10">
               <h2 className="text-3xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
-                Education
-              </h2>
-              <div className="pl-16 space-y-4">
-                {data.educations.map((ed, idx) => (
-                  <div key={idx}>
-                    <div className="flex justify-between items-baseline mb-1">
-                      <h3 className="text-lg font-serif font-bold text-amber-900 dark:text-amber-100">{ed.title}</h3>
-                      <span className="text-sm text-amber-700 dark:text-amber-300 font-sans">
-                        {fmt(ed.from_date)} – {fmt(ed.to_date)}
-                      </span>
-                    </div>
-                    <p className="text-amber-800 dark:text-amber-200 font-serif">{ed.description}</p>
-                  </div>
-                ))}
-              </div>
-            </div>
-
-            <div className="mb-10">
-              <h2 className="text-3xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
-                <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
-                Notable Projects
+                Projects
               </h2>
               <div className="pl-16 space-y-4">
                 {data.projects.map((p, idx) => (
@@ -931,38 +1054,62 @@ export default function ResumeThemes() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-8">
-              <div>
-                <h2 className="text-2xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
-                  <div className="w-8 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
-                  Certifications
-                </h2>
-                <div className="pl-12 space-y-2">
-                  {data.certifications.map((c, idx) => (
-                    <div key={idx}>
-                      <h3 className="font-serif font-semibold text-amber-900 dark:text-amber-100">{c.title}</h3>
-                      <p className="text-sm text-amber-700 dark:text-amber-300 font-sans">{fmt(c.from_date)}</p>
+            <div className="mb-10">
+              <h2 className="text-3xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
+                <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
+                Certifications
+              </h2>
+              <div className="pl-16 space-y-4">
+                {data.certifications.map((p, idx) => (
+                  <div key={idx} className="border-l-2 border-amber-300 dark:border-amber-700 pl-4">
+                    <div className="flex justify-between items-baseline mb-1">
+                      <h3 className="text-lg font-serif font-bold text-amber-900 dark:text-amber-100">{p.title}</h3>
+                      <span className="text-sm text-amber-700 dark:text-amber-300 font-sans">
+                        {fmt(p.from_date)} – {fmt(p.to_date)}
+                      </span>
                     </div>
-                  ))}
-                </div>
+                    <p className="text-amber-800 dark:text-amber-200 font-serif">{p.description}</p>
+                  </div>
+                ))}
               </div>
+            </div>
 
-              <div>
-                <h2 className="text-2xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
-                  <div className="w-8 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
-                  Interests
-                </h2>
-                <div className="pl-12">
-                  <p className="text-amber-800 dark:text-amber-200 font-serif">
-                    {data.hobbies.map((h) => h.title).join(" • ")}
-                  </p>
-                </div>
+            <div className="mb-10">
+              <h2 className="text-3xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
+                <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
+                Skills
+              </h2>
+              <div className="pl-16 grid md:grid-cols-3 gap-6">
+                {Object.entries(data.skills).map(([cat, arr]) => (
+                  <div key={cat}>
+                    <h3 className="text-sm uppercase tracking-wider text-amber-700 dark:text-amber-300 font-semibold mb-2 font-sans">
+                      {cat}
+                    </h3>
+                    <ul className="space-y-1">
+                      {arr.map((s, i) => (
+                        <li key={i} className="text-amber-800 dark:text-amber-200 font-serif">
+                          {s}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div>
+              <h2 className="text-2xl font-serif font-bold text-amber-900 dark:text-amber-100 mb-4 flex items-center gap-3">
+                <div className="w-8 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
+                Interests
+              </h2>
+              <div className="pl-12">
+                <p className="text-amber-800 dark:text-amber-200 font-serif">
+                  {data.hobbies.map((h) => h.title).join(" • ")}
+                </p>
               </div>
             </div>
           </div>
         </div>
       )}
-      
     </div>
   )
 }
