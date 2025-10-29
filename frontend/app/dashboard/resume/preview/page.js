@@ -989,7 +989,7 @@ export default function ResumeThemes() {
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
                 About me
               </h2>
-              <p className="text-amber-800 dark:text-amber-200 leading-relaxed font-serif text-lg pl-16">
+              <p className="text-amber-800 dark:text-amber-200 leading-relaxed font-serif text-lg pl-0">
                 {data.title.about}
               </p>
             </div>
@@ -999,9 +999,9 @@ export default function ResumeThemes() {
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
                 Education
               </h2>
-              <div className="pl-16 space-y-4">
+              <div className="pl-0 space-y-4">
                 {data.educations.map((ed, idx) => (
-                  <div key={idx}>
+                  <div key={idx} className="border-l-2 border-amber-300 pl-4">
                     <div className="flex justify-between items-baseline mb-1">
                       <h3 className="text-lg font-serif font-bold text-amber-900 dark:text-amber-100">{ed.title}</h3>
                       <span className="text-sm text-amber-700 dark:text-amber-300 font-sans">
@@ -1019,9 +1019,9 @@ export default function ResumeThemes() {
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
                 Professional Experience
               </h2>
-              <div className="pl-16 space-y-6">
+              <div className="pl-0 space-y-6">
                 {data.works.map((w, idx) => (
-                  <div key={idx}>
+                  <div key={idx} className="border-l-2 border-amber-300 pl-4">
                     <div className="flex justify-between items-baseline mb-2">
                       <h3 className="text-xl font-serif font-bold text-amber-900 dark:text-amber-100">{w.title}</h3>
                       <span className="text-sm text-amber-700 dark:text-amber-300 font-sans">
@@ -1039,7 +1039,7 @@ export default function ResumeThemes() {
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
                 Projects
               </h2>
-              <div className="pl-16 space-y-4">
+              <div className="pl-0 space-y-4">
                 {data.projects.map((p, idx) => (
                   <div key={idx} className="border-l-2 border-amber-300 dark:border-amber-700 pl-4">
                     <div className="flex justify-between items-baseline mb-1">
@@ -1059,7 +1059,7 @@ export default function ResumeThemes() {
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
                 Certifications
               </h2>
-              <div className="pl-16 space-y-4">
+              <div className="pl-0 space-y-4">
                 {data.certifications.map((p, idx) => (
                   <div key={idx} className="border-l-2 border-amber-300 dark:border-amber-700 pl-4">
                     <div className="flex justify-between items-baseline mb-1">
@@ -1079,7 +1079,7 @@ export default function ResumeThemes() {
                 <div className="w-12 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
                 Skills
               </h2>
-              <div className="pl-16 grid md:grid-cols-3 gap-6">
+              <div className="pl-0 grid md:grid-cols-3 gap-6">
                 {Object.entries(data.skills).map(([cat, arr]) => (
                   <div key={cat}>
                     <h3 className="text-sm uppercase tracking-wider text-amber-700 dark:text-amber-300 font-semibold mb-2 font-sans">
@@ -1101,7 +1101,7 @@ export default function ResumeThemes() {
                 <div className="w-8 h-0.5 bg-amber-800 dark:bg-amber-200"></div>
                 Interests
               </h2>
-              <div className="pl-12">
+              <div className="pl-0">
                 <p className="text-amber-800 dark:text-amber-200 font-serif">
                   {data.hobbies.map((h) => h.title).join(" • ")}
                 </p>

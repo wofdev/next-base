@@ -22,6 +22,7 @@ export default function AboutSection({
     ) {
       toast("invalid input...", {
         unstyled: true,
+        position: "top-center",
         className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
       });
     } else {

@@ -17,6 +17,7 @@ export default function ContactSection({
       toast("Empty phone is not allowed",
           {
             unstyled: true,
+            position: "top-center",
             className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
           });
       return;
@@ -26,6 +27,7 @@ export default function ContactSection({
       toast("Empty email is not allowed",
           {
             unstyled: true,
+            position: "top-center",
             className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
           });
       return;
@@ -35,6 +37,7 @@ export default function ContactSection({
       toast("Invalid phone",
           {
             unstyled: true,
+            position: "top-center",
             className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
           });
       return;
@@ -44,6 +47,7 @@ export default function ContactSection({
       toast("Invalid email",
           {
             unstyled: true,
+            position: "top-center",
             className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
           });
       return;

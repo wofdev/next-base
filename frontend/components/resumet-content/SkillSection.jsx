@@ -37,6 +37,7 @@ export default function SkillsSection({
             if (Object.keys(resumeData.skills).includes(newCategory)) {
               toast("This category already exists.", {
                 unstyled: true,
+                position: "top-center",
                 className:
                   "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
               });
@@ -103,6 +104,7 @@ export default function SkillsSection({
                       if (resumeData.skills[category].includes(newSkill)) {
                         toast("This category already exists.", {
                           unstyled: true,
+                          position: "top-center",
                           className:
                             "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
                         });

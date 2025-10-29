@@ -80,6 +80,7 @@ export default function ResumeContent() {
       if (!title.trim() || !description.trim()) {
         toast("Empty field is not allowed...", {
           unstyled: true,
+          position: "top-center",
           className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
         });
         return;
@@ -88,6 +89,7 @@ export default function ResumeContent() {
       if (!title.trim() || !from_date || !to_date || !description.trim()) {
         toast("Empty field is not allowed...", {
           unstyled: true,
+          position: "top-center",
           className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
         });
         return;
@@ -156,12 +158,14 @@ export default function ResumeContent() {
 
       toast("Data saved successfully!", {
         unstyled: true,
+        position: "top-center",
         className: "bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg",
       });
     } catch (error) {
       console.error("Error saving data:", error);
       toast("❌ Failed to save data.", {
         unstyled: true,
+        position: "top-center",
         className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
       });
     }
