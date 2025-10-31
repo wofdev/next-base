@@ -184,7 +184,7 @@ export default function ResumeContent() {
       <p
         className="text-sm text-gray-400"
         onClick={() => {
-          console.log(contactData);
+          console.log(resumeData);
         }}
       >
         Edit your resume content
