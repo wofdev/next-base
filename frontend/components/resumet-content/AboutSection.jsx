@@ -11,7 +11,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { Cross, Trash2 } from "lucide-react";
+import { Cross, Plus, Trash2, X } from "lucide-react";
 
 export default function AboutSection({
   resumeData,
@@ -89,7 +89,7 @@ export default function AboutSection({
 
         {/* نمایش تصویر — هم برای فایل جدید، هم فایل ذخیره‌شده از بک‌اند */}
         <div className="relative inline-block">
-          {titleData?.profile_photo && (
+          {titleData?.profile_photo ? (
             <img
               src={
                 titleData.profile_photo instanceof File
@@ -99,7 +99,7 @@ export default function AboutSection({
               alt="Profile"
               className="mt-2 w-24 h-24 object-cover rounded-full border"
             />
-          )}
+          ) : <div className="mt-2 w-24 h-24 object-cover rounded-full border flex items-center justify-center"> no image </div>}
 
           <label className=" absolute right-0 top-18 w-6 h-6 flex items-center justify-center rounded-full  bg-blue-600 cursor-pointer">
             <input
@@ -110,48 +110,23 @@ export default function AboutSection({
                 setTitleData({
                   ...titleData,
                   profile_photo: e.target.files?.[0] || null,
+                  remove_photo: true, 
                 })
               }
             />
-            {/* Plus icon */}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-5 h-5 text-white"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M12 4v16m8-8H4"
-              />
-            </svg>
+            <Plus className="text-white"/>
           </label>
           <label
             onClick={() => {
-              setResumeData({
+              setTitleData({
                 ...titleData,
                 profile_photo: null,
+                remove_photo: true, 
               });
             }}
             className="text-white p-1 absolute left-0 top-18 w-6 h-6 flex items-center justify-center rounded-full  bg-rose-600 cursor-pointer"
           >
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              className="w-4 h-4"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M6 18L18 6M6 6l12 12"
-              />
-            </svg>
+            <X/>
           </label>
         </div>
       </div>

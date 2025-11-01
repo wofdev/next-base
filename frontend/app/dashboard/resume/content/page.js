@@ -137,6 +137,10 @@ export default function ResumeContent() {
         formData.append("profile_photo", resumeData.title.profile_photo);
       }
 
+      if (resumeData.title?.remove_photo) {
+  formData.append("remove_photo", "true");
+}
+
       // بقیه بخش‌ها
       formData.append("contact", JSON.stringify(resumeData.contact || {}));
       formData.append(
