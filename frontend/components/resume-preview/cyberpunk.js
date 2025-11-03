@@ -42,6 +42,11 @@ export default function Cyberpunk ({data}) {
   const hasCertifications = data.certifications && data.certifications.length;
   const hasHobbies = data.hobbies && data.hobbies.length;
   const hasSkills = Object.keys(data.skills || {}).length > 0;
+  const fmt = (d) => {
+    if (!d) return "Present"
+    const date = new Date(d)
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "short" })
+  }
     return (
         <div className="min-h-screen bg-black rounded-2xl p-8 relative overflow-hidden">
           <div className="absolute inset-0 opacity-20">

@@ -148,8 +148,8 @@ export default function AboutSection({
           </SelectTrigger>
           <SelectContent>
             <SelectItem value={1}>Modern</SelectItem>
-            <SelectItem value={2}>Garden</SelectItem>
-            <SelectItem value={3}>Mango</SelectItem>
+            <SelectItem value={2}>Green Garden</SelectItem>
+            <SelectItem value={3}>Red Pumpkin</SelectItem>
             <SelectItem value={4}>Cyberpunk</SelectItem>
             <SelectItem value={5}>England</SelectItem>
           </SelectContent>

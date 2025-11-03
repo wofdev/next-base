@@ -42,6 +42,11 @@ export default function Mango ({data}) {
   const hasCertifications = data.certifications && data.certifications.length;
   const hasHobbies = data.hobbies && data.hobbies.length;
   const hasSkills = Object.keys(data.skills || {}).length > 0;
+  const fmt = (d) => {
+    if (!d) return "Present"
+    const date = new Date(d)
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "short" })
+  }
     return (
         <div className="min-h-screen bg-gradient-to-br from-orange-100 via-red-50 to-pink-100 dark:from-gray-900 dark:via-red-950 dark:to-orange-950 rounded-2xl p-8">
           <div className="max-w-7xl mx-auto">

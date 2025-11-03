@@ -42,6 +42,11 @@ export default function Modern ({data}) {
   const hasCertifications = data.certifications && data.certifications.length;
   const hasHobbies = data.hobbies && data.hobbies.length;
   const hasSkills = Object.keys(data.skills || {}).length > 0;
+  const fmt = (d) => {
+    if (!d) return "Present"
+    const date = new Date(d)
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "short" })
+  }
     return (
         <div className="min-h-screen bg-gray-50 dark:bg-gray-900 transition-colors duration-300 relative overflow-hidden rounded-2xl">
           <div className="absolute inset-0 overflow-hidden pointer-events-none">

@@ -42,6 +42,11 @@ export default function Garden ({data}) {
   const hasCertifications = data.certifications && data.certifications.length;
   const hasHobbies = data.hobbies && data.hobbies.length;
   const hasSkills = Object.keys(data.skills || {}).length > 0;
+  const fmt = (d) => {
+    if (!d) return "Present"
+    const date = new Date(d)
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "short" })
+  }
     return (
         <div className="min-h-screen bg-green-50 dark:bg-slate-900 rounded-2xl">
           <div className="container mx-auto p-8">

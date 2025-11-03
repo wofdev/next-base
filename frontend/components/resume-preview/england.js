@@ -42,6 +42,11 @@ export default function England ({data}) {
   const hasCertifications = data.certifications && data.certifications.length;
   const hasHobbies = data.hobbies && data.hobbies.length;
   const hasSkills = Object.keys(data.skills || {}).length > 0;
+  const fmt = (d) => {
+    if (!d) return "Present"
+    const date = new Date(d)
+    return date.toLocaleDateString("en-US", { year: "numeric", month: "short" })
+  }
     return (
         <div className="min-h-screen bg-amber-50 dark:bg-stone-900 rounded-2xl p-8">
           <div className="max-w-5xl mx-auto">
