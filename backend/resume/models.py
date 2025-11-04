@@ -6,6 +6,7 @@ class Title(models.Model):
     display_name = models.CharField(max_length=255, blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     profile_photo = models.ImageField(upload_to='profile_photos')
+    birth = models.DateField(null=True, blank=True)
     theme = models.IntegerField()
     def __str__(self):
         return self.display_name or self.title
@@ -17,6 +18,7 @@ class Contact(models.Model):
     linkedin = models.CharField(max_length=255,blank=True)
     twitter = models.CharField(max_length=255,blank=True)
     instagram = models.CharField(max_length=255,blank=True)
+    address = models.CharField(max_length=1000,blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
     def __str__(self):
         return self.phone

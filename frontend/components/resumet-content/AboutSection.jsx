@@ -84,6 +84,31 @@ export default function AboutSection({
         />
       </div>
 
+      <div className="flex flex-col w-1/2">
+        <Label className="mb-2">Birth Date</Label>
+        <div className="flex items-center gap-3">
+          <Input
+            type="date"
+            value={titleData.birth || ""}
+            onChange={(e) =>
+              setTitleData({
+                ...titleData,
+                birth: e.target.value,
+              })
+            }
+            className="w-42 dark:bg-gray-400 bg-gray-50"
+          />
+          <X className="bg-rose-600 text-white rounded-full cursor-pointer"
+          onClick={()=>{
+            setTitleData({
+              ...titleData,
+              birth:null
+            })
+          }}
+          />
+        </div>
+      </div>
+
       <div>
         <Label className="mb-2">Profile Photo</Label>
 
@@ -110,23 +135,23 @@ export default function AboutSection({
                 setTitleData({
                   ...titleData,
                   profile_photo: e.target.files?.[0] || null,
-                  remove_photo: true, 
+                  remove_photo: true,
                 })
               }
             />
-            <Plus className="text-white"/>
+            <Plus className="text-white" />
           </label>
           <label
             onClick={() => {
               setTitleData({
                 ...titleData,
                 profile_photo: null,
-                remove_photo: true, 
+                remove_photo: true,
               });
             }}
             className="text-white p-1 absolute left-0 top-18 w-6 h-6 flex items-center justify-center rounded-full  bg-rose-600 cursor-pointer"
           >
-            <X/>
+            <X />
           </label>
         </div>
       </div>

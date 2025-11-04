@@ -15,41 +15,41 @@ export default function ContactSection({
   const handleClick = () => {
     if (contactData.phone === "") {
       toast("Empty phone is not allowed",
-          {
-            unstyled: true,
-            position: "top-center",
-            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
-          });
+        {
+          unstyled: true,
+          position: "top-center",
+          className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+        });
       return;
     }
 
     if (contactData.email === "") {
       toast("Empty email is not allowed",
-          {
-            unstyled: true,
-            position: "top-center",
-            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
-          });
+        {
+          unstyled: true,
+          position: "top-center",
+          className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+        });
       return;
     }
 
     if (!/^[+]?\d+$/.test(contactData.phone)) {
       toast("Invalid phone",
-          {
-            unstyled: true,
-            position: "top-center",
-            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
-          });
+        {
+          unstyled: true,
+          position: "top-center",
+          className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+        });
       return;
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(contactData.email)) {
       toast("Invalid email",
-          {
-            unstyled: true,
-            position: "top-center",
-            className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
-          });
+        {
+          unstyled: true,
+          position: "top-center",
+          className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
+        });
       return;
     }
 
@@ -78,6 +78,18 @@ export default function ContactSection({
           setContactData({
             ...contactData,
             email: e.target.value,
+          })
+        }
+        className="mb-2 dark:bg-gray-400 bg-gray-50"
+      />
+
+      <Label className="mb-2">Address</Label>
+      <Input
+        value={contactData?.address || ""}
+        onChange={(e) =>
+          setContactData({
+            ...contactData,
+            address: e.target.value,
           })
         }
         className="mb-2 dark:bg-gray-400 bg-gray-50"

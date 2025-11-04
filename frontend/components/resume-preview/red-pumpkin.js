@@ -33,9 +33,10 @@ import {
   PhilippinePeso,
   PhoneCall,
   Smile,
+  Pin,
 } from "lucide-react";
 
-export default function Mango ({data}) {
+export default function RedPumpkin ({data}) {
   const hasEducations = data.educations && data.educations.length;
   const hasWorks = data.works && data.works.length;
   const hasProjects = data.projects && data.projects.length;
@@ -65,12 +66,14 @@ export default function Mango ({data}) {
                     </Avatar>
                   )}
                   <div className="text-center sm:text-left">
+                   
                     <h1 className="text-3xl sm:text-5xl font-black mb-3">
                       {data.title.display_name}
                     </h1>
-                    <p className="text-xl sm:text-2xl font-light text-red-100">
+                    <p className="text-xl sm:text-2xl font-light">
                       {data.title.title}
                     </p>
+                    { data.title.birth && <span>{new Date().getFullYear() - new Date(data.title.birth).getFullYear()} y.o.</span>}
                     <p className="mt-4 text-red-50 max-w-2xl">
                       {data.title.about}
                     </p>
@@ -100,6 +103,19 @@ export default function Mango ({data}) {
                       </div>
                     )}
                   </div>
+                  {data.contact?.address && (
+                  <div
+                    className="flex gap-2"
+                  >{" "}
+                    <Pin className="w-4 h-4 text-red-600 dark:text-red-400 shrink-0 mt-1" />{" "}
+                    <div className="text-gray-700 dark:text-gray-300">
+                      <span className="whitespace-normal break-words text-left">
+                        {data.contact.address}
+                      </span>
+                    </div>
+
+                  </div>
+                )}
                   <div className="flex gap-2">
                     {" "}
                     {data.contact.email && (

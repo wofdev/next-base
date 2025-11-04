@@ -3,8 +3,8 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import Modern from "@/components/resume-preview/modern";
-import Garden from "@/components/resume-preview/gardern";
-import Mango from "@/components/resume-preview/mango";
+import GreenGarden from "@/components/resume-preview/green-gardern";
+import RedPumpkin from "@/components/resume-preview/red-pumpkin";
 import Cyberpunk from "@/components/resume-preview/cyberpunk";
 import England from "@/components/resume-preview/england";
 
@@ -23,8 +23,8 @@ export default function ResumeThemes() {
   return (
     <div className="min-h-screen dark:bg-gray-950">
       {data?.title?.theme == 1 && <Modern data={data} />}
-      {data?.title?.theme == 2 && <Garden data={data} />}
-      {data?.title?.theme == 3 && <Mango data={data} />}
+      {data?.title?.theme == 2 && <GreenGarden data={data} />}
+      {data?.title?.theme == 3 && <RedPumpkin data={data} />}
       {data?.title?.theme == 4 && <Cyberpunk data={data} />}
       {data?.title?.theme == 5 && <England data={data} />}
     </div>
