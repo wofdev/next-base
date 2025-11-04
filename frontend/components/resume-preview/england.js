@@ -97,7 +97,7 @@ export default function England({ data }) {
                   )}
                   {data.contact.address && (
                     <tr className="hover:bg-amber-100 dark:hover:bg-amber-900/30 transition-colors">
-                      <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap">
+                      <td className="text-amber-900 dark:text-amber-100 whitespace-nowrap align-top pt-3">
                         <Pin className="w-4 h-4 text-amber-700 dark:text-amber-400" />
                       </td>
                       <td className="px-4 py-2 text-amber-800 dark:text-amber-200 flex items-center gap-2 max-w-56">
