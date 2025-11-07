@@ -21,9 +21,9 @@ export default function HobbySection({
         >
           <div>
             <div>{item.title || "Untitled"}</div>
-            <div className="">
+            {/* <div className="">
               {item.description?.substring(0, 50) + "..." || "Untitled"}
-            </div>
+            </div> */}
           </div>
           <div className="flex gap-1">
             <Trash2

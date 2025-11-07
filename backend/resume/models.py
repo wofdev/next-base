@@ -3,15 +3,15 @@ from django.contrib.auth.models import User
 class Title(models.Model):
     about = models.TextField()
     title = models.CharField(max_length=255)
-    display_name = models.CharField(max_length=255, blank=True)
+    display_name = models.CharField(max_length=255)
     user = models.OneToOneField(User, on_delete=models.CASCADE)
-    profile_photo = models.ImageField(upload_to='profile_photos')
+    profile_photo = models.ImageField(upload_to='profile_photos', blank=True, null=True)
     birth = models.DateField(null=True, blank=True)
-    theme = models.IntegerField()
+    theme = models.IntegerField(default=1)
     def __str__(self):
         return self.display_name or self.title
 class Contact(models.Model):
-    phone = models.CharField(max_length=11)
+    phone = models.CharField(max_length=25)
     email = models.CharField(max_length=255)
     website = models.CharField(max_length=255,blank=True)
     github = models.CharField(max_length=255,blank=True)
@@ -26,7 +26,7 @@ class Education(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     title = models.CharField(max_length=500)
-    description = models.TextField()
+    description = models.TextField(null=True,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="educations")
     def __str__(self):
         return f"{self.title} ({self.from_date} - {self.to_date})"
@@ -34,7 +34,7 @@ class Work(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     title = models.CharField(max_length=500)
-    description = models.TextField()
+    description = models.TextField(null=True,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="works")
     def __str__(self):
         return f"{self.title} ({self.from_date} - {self.to_date})"
@@ -42,7 +42,7 @@ class Project(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     title = models.CharField(max_length=500)
-    description = models.TextField()
+    description = models.TextField(null=True,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="projects")
     def __str__(self):
         return f"{self.title} ({self.from_date} - {self.to_date})"
@@ -50,13 +50,13 @@ class Certification(models.Model):
     from_date = models.DateField()
     to_date = models.DateField()
     title = models.CharField(max_length=500)
-    description = models.TextField()
+    description = models.TextField(null=True,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="certifications")
     def __str__(self):
         return f"{self.title} ({self.from_date} - {self.to_date})"
 class Hobby(models.Model):
     title = models.CharField(max_length=500)
-    description = models.TextField()
+    description = models.TextField(null=True,blank=True)
     user = models.ForeignKey(User, on_delete=models.CASCADE, related_name="hobbies")
     def __str__(self):
         return f"{self.title}"

@@ -77,7 +77,7 @@ export default function ResumeContent() {
     } = tempData;
 
     if (openDialog === "hobbies") {
-      if (!title.trim() || !description.trim()) {
+      if (!title.trim()) {
         toast("Empty field is not allowed...", {
           unstyled: true,
           position: "top-center",
@@ -86,7 +86,7 @@ export default function ResumeContent() {
         return;
       }
     } else {
-      if (!title.trim() || !from_date || !to_date || !description.trim()) {
+      if (!title.trim() || !from_date || !to_date) {
         toast("Empty field is not allowed...", {
           unstyled: true,
           position: "top-center",
@@ -138,8 +138,8 @@ export default function ResumeContent() {
       }
 
       if (resumeData.title?.remove_photo) {
-  formData.append("remove_photo", "true");
-}
+        formData.append("remove_photo", "true");
+      }
 
       // بقیه بخش‌ها
       formData.append("contact", JSON.stringify(resumeData.contact || {}));
@@ -167,7 +167,7 @@ export default function ResumeContent() {
       });
     } catch (error) {
       console.error("Error saving data:", error);
-      toast("❌ Failed to save data.", {
+      toast("failed to save data.", {
         unstyled: true,
         position: "top-center",
         className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
@@ -178,9 +178,9 @@ export default function ResumeContent() {
   return (
     <div className="w-3/4 p-6 space-y-6 relative rounded-lg">
       {loading && (
-        <div className=" bg-gray-400/25 flex justify-center items-center w-full h-full absolute z-1000 ">
+        <div className=" bg-gray-400/0 flex justify-center items-center w-full h-full absolute z-1000 ">
           <div className="bg-slate-950 flex p-3 rounded-md">
-            <Loader2Icon className="animate-spin h-6 w-6 me-2" /> 
+            <Loader2Icon className="animate-spin h-6 w-6 me-2" />
             loading please wait...
           </div>
         </div>
@@ -342,39 +342,42 @@ export default function ResumeContent() {
             className=" mb-2 text-black dark:text-white"
           />
           {openDialog !== "hobbies" && (
-            <div className="flex gap-4 mb-2">
-              <div className="flex flex-col w-1/2">
-                <label className="text-sm text-gray-600 mb-1">From</label>
-                <Input
-                  className=" text-black dark:text-white"
-                  type="date"
-                  value={tempData.from_date || ""}
-                  onChange={(e) =>
-                    setTempData({ ...tempData, from_date: e.target.value })
-                  }
-                />
+            <div>
+              <div className="flex gap-4 mb-2">
+                <div className="flex flex-col w-1/2">
+                  <label className="text-sm text-gray-600 mb-1">From</label>
+                  <Input
+                    className=" text-black dark:text-white"
+                    type="date"
+                    value={tempData.from_date || ""}
+                    onChange={(e) =>
+                      setTempData({ ...tempData, from_date: e.target.value })
+                    }
+                  />
+                </div>
+                <div className="flex flex-col w-1/2">
+                  <label className="text-sm text-gray-600 mb-1">To</label>
+                  <Input
+                    className=" text-black dark:text-white"
+                    type="date"
+                    value={tempData.to_date || ""}
+                    onChange={(e) =>
+                      setTempData({ ...tempData, to_date: e.target.value })
+                    }
+                  />
+                </div>
               </div>
-              <div className="flex flex-col w-1/2">
-                <label className="text-sm text-gray-600 mb-1">To</label>
-                <Input
-                  className=" text-black dark:text-white"
-                  type="date"
-                  value={tempData.to_date || ""}
-                  onChange={(e) =>
-                    setTempData({ ...tempData, to_date: e.target.value })
-                  }
-                />
-              </div>
+              <Textarea
+                placeholder="Description"
+                value={tempData.description || ""}
+                onChange={(e) =>
+                  setTempData({ ...tempData, description: e.target.value })
+                }
+                className=" mb-2 text-black dark:text-white"
+              />
             </div>
           )}
-          <Textarea
-            placeholder="Description"
-            value={tempData.description || ""}
-            onChange={(e) =>
-              setTempData({ ...tempData, description: e.target.value })
-            }
-            className=" mb-2 text-black dark:text-white"
-          />
+
           <DialogFooter>
             <Button variant="outline" onClick={() => setOpenDialog(null)}>
               Cancel

@@ -26,7 +26,7 @@ export default function AboutSection({
       titleData.display_name == "" ||
       titleData.title == ""
     ) {
-      toast("invalid input...", {
+      toast("About, display name and title can not be empty...", {
         unstyled: true,
         position: "top-center",
         className: "bg-rose-600 text-white px-4 py-2 rounded-lg shadow-lg",
