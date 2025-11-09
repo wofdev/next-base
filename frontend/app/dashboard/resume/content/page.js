@@ -29,6 +29,16 @@ import SkillsSection from "@/components/resumet-content/SkillSection";
 import { Loader2Icon } from "lucide-react";
 import { toast } from "sonner";
 
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+
 export default function ResumeContent() {
   const [resumeData, setResumeData] = useState({});
   const [editIndex, setEditIndex] = useState(null);
@@ -344,7 +354,7 @@ export default function ResumeContent() {
           {openDialog !== "hobbies" && (
             <div>
               <div className="flex gap-4 mb-2">
-                <div className="flex flex-col w-1/2">
+                {/* <div className="flex flex-col w-1/2">
                   <label className="text-sm text-gray-600 mb-1">From</label>
                   <Input
                     className=" text-black dark:text-white"
@@ -354,8 +364,54 @@ export default function ResumeContent() {
                       setTempData({ ...tempData, from_date: e.target.value })
                     }
                   />
-                </div>
+                </div> */}
+                {/* FROM DATE PICKER */}
+
                 <div className="flex flex-col w-1/2">
+                  <label className="text-sm text-gray-600 mb-1">From</label>
+                  <Popover>
+                    <PopoverTrigger asChild className="w-1/2">
+                      <Button
+                        className={cn(
+                          "w-full justify-start text-left font-normal text-black dark:text-white bg-gray-200",
+                          !tempData.from_date && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {tempData.from_date ? (
+                          format(new Date(tempData.from_date), "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        captionLayout="dropdown" // 👈 اضافه‌شده برای نمایش انتخاب ماه و سال
+                        fromYear={1950} // 👈 از چه سالی نمایش دهد
+                        toYear={new Date().getFullYear()} // 👈 تا سال فعلی
+                        selected={
+                          tempData.from_date
+                            ? new Date(tempData.from_date)
+                            : undefined
+                        }
+                        onSelect={(date) =>
+                          setTempData({
+                            ...tempData,
+                            from_date: date
+                              ? date
+                                ? format(date, "yyyy-MM-dd")
+                                : ""
+                              : "",
+                          })
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
+                </div>
+                {/* <div className="flex flex-col w-1/2">
                   <label className="text-sm text-gray-600 mb-1">To</label>
                   <Input
                     className=" text-black dark:text-white"
@@ -365,6 +421,50 @@ export default function ResumeContent() {
                       setTempData({ ...tempData, to_date: e.target.value })
                     }
                   />
+                </div> */}
+                <div className="flex flex-col w-1/2">
+                  <label className="text-sm text-gray-600 mb-1">to</label>
+                  <Popover>
+                    <PopoverTrigger asChild className="w-1/2">
+                      <Button
+                        className={cn(
+                          "w-full justify-start text-left font-normal text-black dark:text-white bg-gray-200",
+                          !tempData.to_date && "text-muted-foreground"
+                        )}
+                      >
+                        <CalendarIcon className="mr-2 h-4 w-4" />
+                        {tempData.to_date ? (
+                          format(new Date(tempData.to_date), "PPP")
+                        ) : (
+                          <span>Pick a date</span>
+                        )}
+                      </Button>
+                    </PopoverTrigger>
+                    <PopoverContent className="w-auto p-0" align="start">
+                      <Calendar
+                        mode="single"
+                        captionLayout="dropdown" // 👈 اضافه‌شده برای نمایش انتخاب ماه و سال
+                        fromYear={1950} // 👈 از چه سالی نمایش دهد
+                        toYear={new Date().getFullYear()} // 👈 تا سال فعلی
+                        selected={
+                          tempData.to_date
+                            ? new Date(tempData.to_date)
+                            : undefined
+                        }
+                        onSelect={(date) =>
+                          setTempData({
+                            ...tempData,
+                            to_date: date
+                              ? date
+                                ? format(date, "yyyy-MM-dd")
+                                : ""
+                              : "",
+                          })
+                        }
+                        initialFocus
+                      />
+                    </PopoverContent>
+                  </Popover>
                 </div>
               </div>
               <Textarea

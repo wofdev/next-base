@@ -13,6 +13,16 @@ import {
 } from "@/components/ui/select";
 import { Cross, Plus, Trash2, X } from "lucide-react";
 
+import { format } from "date-fns";
+import { Calendar as CalendarIcon } from "lucide-react";
+import {
+  Popover,
+  PopoverTrigger,
+  PopoverContent,
+} from "@/components/ui/popover";
+import { Calendar } from "@/components/ui/calendar";
+import { cn } from "@/lib/utils";
+
 export default function AboutSection({
   resumeData,
   setResumeData,
@@ -84,7 +94,7 @@ export default function AboutSection({
         />
       </div>
 
-      <div className="flex flex-col w-1/2">
+      {/* <div className="flex flex-col w-1/2">
         <Label className="mb-2">Birth Date</Label>
         <div className="flex items-center gap-3">
           <Input
@@ -107,6 +117,42 @@ export default function AboutSection({
           }}
           />
         </div>
+      </div> */}
+      <div className="flex flex-col w-54">
+        <label className="text-sm text-gray-600 mb-1">birth</label>
+        <Popover>
+          <PopoverTrigger asChild className="w-1/2">
+            <Button
+              className={cn(
+                "w-full justify-start text-left font-normal text-black dark:text-white bg-gray-200",
+                !titleData.birth && "text-muted-foreground"
+              )}
+            >
+              <CalendarIcon className="mr-2 h-4 w-4" />
+              {titleData.birth ? (
+                format(new Date(titleData.birth), "PPP")
+              ) : (
+                <span>Pick a date</span>
+              )}
+            </Button>
+          </PopoverTrigger>
+          <PopoverContent className="w-auto p-0" align="start">
+            <Calendar
+              mode="single"
+              captionLayout="dropdown" // 👈 اضافه‌شده برای نمایش انتخاب ماه و سال
+              fromYear={1950} // 👈 از چه سالی نمایش دهد
+              toYear={new Date().getFullYear()} // 👈 تا سال فعلی
+              selected={titleData.birth ? new Date(titleData.birth) : undefined}
+              onSelect={(date) =>
+                setTitleData({
+                  ...titleData,
+                  birth: date ? (date ? format(date, "yyyy-MM-dd") : "") : "",
+                })
+              }
+              initialFocus
+            />
+          </PopoverContent>
+        </Popover>
       </div>
 
       <div>
@@ -124,7 +170,12 @@ export default function AboutSection({
               alt="Profile"
               className="mt-2 w-24 h-24 object-cover rounded-full border"
             />
-          ) : <div className="mt-2 w-24 h-24 object-cover rounded-full border flex items-center justify-center"> no image </div>}
+          ) : (
+            <div className="mt-2 w-24 h-24 object-cover rounded-full border flex items-center justify-center">
+              {" "}
+              no image{" "}
+            </div>
+          )}
 
           <label className=" absolute right-0 top-18 w-6 h-6 flex items-center justify-center rounded-full  bg-blue-600 cursor-pointer">
             <input
