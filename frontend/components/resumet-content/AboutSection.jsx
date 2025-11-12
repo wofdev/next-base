@@ -94,30 +94,6 @@ export default function AboutSection({
         />
       </div>
 
-      {/* <div className="flex flex-col w-1/2">
-        <Label className="mb-2">Birth Date</Label>
-        <div className="flex items-center gap-3">
-          <Input
-            type="date"
-            value={titleData.birth || ""}
-            onChange={(e) =>
-              setTitleData({
-                ...titleData,
-                birth: e.target.value,
-              })
-            }
-            className="w-42 dark:bg-gray-400 bg-gray-50"
-          />
-          <X className="bg-rose-600 text-white rounded-full cursor-pointer"
-          onClick={()=>{
-            setTitleData({
-              ...titleData,
-              birth:null
-            })
-          }}
-          />
-        </div>
-      </div> */}
       <div className="flex flex-col w-54">
         <label className="text-sm text-gray-600 mb-1">birth</label>
         <Popover>
@@ -139,9 +115,9 @@ export default function AboutSection({
           <PopoverContent className="w-auto p-0" align="start">
             <Calendar
               mode="single"
-              captionLayout="dropdown" // 👈 اضافه‌شده برای نمایش انتخاب ماه و سال
-              fromYear={1950} // 👈 از چه سالی نمایش دهد
-              toYear={new Date().getFullYear()} // 👈 تا سال فعلی
+              captionLayout="dropdown"
+              fromYear={1950}
+              toYear={new Date().getFullYear()}
               selected={titleData.birth ? new Date(titleData.birth) : undefined}
               onSelect={(date) =>
                 setTitleData({
@@ -158,7 +134,6 @@ export default function AboutSection({
       <div>
         <Label className="mb-2">Profile Photo</Label>
 
-        {/* نمایش تصویر — هم برای فایل جدید، هم فایل ذخیره‌شده از بک‌اند */}
         <div className="relative inline-block">
           {titleData?.profile_photo ? (
             <img
@@ -207,7 +182,6 @@ export default function AboutSection({
         </div>
       </div>
 
-      {/* Theme Dropdown with shadcn */}
       <div>
         <Label className="mb-2">Theme</Label>
         <Select
